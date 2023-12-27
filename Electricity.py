@@ -418,11 +418,11 @@ class DownloadAPI(object):
 
     def process_zip_file(self, zip_file_path):
         """
-        Extract the contents of the zip file, read the JSON data and returns it to more user friedly Pandas DataFrame.
+        Extracts the zip file's contents, reads the JSON data and returns it to more user-friendly Pandas DataFrame.
         Parameter:
             zip_file_path(str) - the path to the zip file 
         Returns:
-            The DataFrame is printed. 
+            The panda DataFrame is printed. 
         """
         try:
             # Unzip the zip file
