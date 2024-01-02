@@ -264,11 +264,7 @@ class DownloadAPI(object):
         **kwargs
     ):
         """
-        It makes API request based on the specified endpoint, filters, regions and timestamps.  This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request: pass async_req=True. 
-        >>> thread = api.chart_data_filter_region_filter_copy_region_copy_resolution_timestamp_json_get(filter, filter_copy, region_copy, timestamp, region="DE", resolution="hour", async_req=True)
-        >>> result = thread.get()
-        
+        It makes API request based on the specified endpoint, filters, regions and timestamps.         
         Parameters:
             filter(int)
                  * `1223` - Electricity generation: Brown coal (Lignite) 
@@ -324,7 +320,7 @@ class DownloadAPI(object):
                 * `Creos` - Regelzone (LU): Creos 
             region_copy(str) - same as region(), it must be filled due to wrong API design from creators
             timestamp(integer)
-            resolution(str) - resolution of the data, defaultly as "hour"   
+            resolution(str) - resolution of the data, defaultly as "day"   
                 * `hour` - Hourly 
                 * `quarterhour` - Quarterhourly 
                 * `day` - Daily 
@@ -399,7 +395,6 @@ class DownloadAPI(object):
             response = self.chart_data_filter_region_filter_copy_region_copy_resolution_timestamp_json_get(
                 filter, filter_copy, region_copy, timestamp, region, resolution, **kwargs
             )
-
             # Process the API response
             json_data_dic = eval(response.to_str())
             series_data = json_data_dic.get('series', [])
