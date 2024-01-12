@@ -27,3 +27,7 @@ df.rename(columns=rename_dict, inplace=True)
 print(df.columns)
 
 df.to_csv('new_file.csv', sep=';', index=True)
+
+
+
+#ybsdfsafbosf
