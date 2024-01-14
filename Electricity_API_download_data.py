@@ -1,3 +1,11 @@
+#start by downloading the package
+pip install deutschland[smard]
+poetry add deutschland -E smard
+#import package
+from deutschland import smard
+
+
+
 #importing packages
 import pandas as pd
 import numpy as np
