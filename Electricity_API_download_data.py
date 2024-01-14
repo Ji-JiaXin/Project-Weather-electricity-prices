@@ -1,7 +1,6 @@
 #importing packages
 import pandas as pd
 import numpy as np
-from zipfile import ZipFile
 import requests
 
 from deutschland.smard import Configuration
@@ -35,7 +34,7 @@ class DownloadAPI(object):
     api_client 
         It is part of ApiClient class from deutschlad.smard library, it enables the API. 
     
-    chart_data_filter_region_filter_copy_resolution_timestamp_json_get_endpoint
+    chart_data_chart_data_API_request_endpoint
         Used to make requests to API endpoint in order to get specific time series data. 
         It is a part of "_Endpoint" class from deutschland.smard library.       
 
@@ -46,7 +45,7 @@ class DownloadAPI(object):
     def __init__()
         It initializes the class. In case that api_client is not provided it creates ApiClient by default. 
     
-    def chart_data_filter_region_filter_copy_region_copy_resolution_timestamp_json_get()
+    def chart_data_API_request()
         It makes API request based on the specified endpoint, filters, regions and timestamps.
         Parameters:
             filter(int)
@@ -57,7 +56,7 @@ class DownloadAPI(object):
             resolution(str)
             **kwargs
 
-    def chart_data_filter_region_index_resolution_json_get()
+    def chart_data_timestamps()
         Returns available timestamps based on the combination of filter, region and resolution.         
         Parameters:
             filter(int)
@@ -67,9 +66,9 @@ class DownloadAPI(object):
             **kwargs
 
     def download_chart_data()
-        Downloads the data and returns it as a Pandas DataFrame.
+        Downloads the data and returns it as a Pandas DataFrame. It also converts the timestamp column into normal date. 
         Parameters:
-            Same as for the method chart_data_filter_region_filter_copy_region_copy_resolution_timestamp_json_get(). 
+            Same as for the method chart_data_API_request(). 
     
     """
     def __init__(self, api_client=None):
@@ -79,12 +78,12 @@ class DownloadAPI(object):
         self.api_client = api_client
         print(api_client.configuration.host)
         #definition of endpoint
-        self.chart_data_filter_region_filter_copy_region_copy_resolution_timestamp_json_get_endpoint = _Endpoint(
+        self.chart_data_API_request_endpoint = _Endpoint(
             settings={
                 "response_type": (TimeSeries,),
                 "auth": [],
                 "endpoint_path": "/chart_data/{filter}/{region}/{filterCopy}_{regionCopy}_{resolution}_{timestamp}.json",
-                "operation_id": "chart_data_filter_region_filter_copy_region_copy_resolution_timestamp_json_get",
+                "operation_id": "chart_data_API_request",
                 "http_method": "GET",
                 "servers": None,
             },
@@ -263,12 +262,12 @@ class DownloadAPI(object):
             },
             api_client=api_client,
         )
-        self.chart_data_filter_region_index_resolution_json_get_endpoint = _Endpoint(
+        self.chart_data_timestamps_endpoint = _Endpoint(
             settings={
                 "response_type": (Indices,),
                 "auth": [],
                 "endpoint_path": "/chart_data/{filter}/{region}/index_{resolution}.json",
-                "operation_id": "chart_data_filter_region_index_resolution_json_get",
+                "operation_id": "chart_data_timestamps",
                 "http_method": "GET",
                 "servers": None,
             },
@@ -379,7 +378,7 @@ class DownloadAPI(object):
             api_client=api_client,
         )
         
-    def chart_data_filter_region_filter_copy_region_copy_resolution_timestamp_json_get(
+    def chart_data_API_request(
         self,
         filter,
         filter_copy,
@@ -500,17 +499,16 @@ class DownloadAPI(object):
         kwargs["_spec_property_naming"] = kwargs.get("_spec_property_naming", False)
         kwargs["_content_type"] = kwargs.get("_content_type")
         kwargs["_host_index"] = kwargs.get("_host_index")
-        # kwargs["_request_auths"] = kwargs.get("_request_auths", None)
         kwargs["filter"] = filter
         kwargs["filter_copy"] = filter_copy
         kwargs["region"] = region
         kwargs["region_copy"] = region_copy
         kwargs["resolution"] = resolution
         kwargs["timestamp"] = timestamp
-        return self.chart_data_filter_region_filter_copy_region_copy_resolution_timestamp_json_get_endpoint.call_with_http_info(
+        return self.chart_data_API_request_endpoint.call_with_http_info(
             **kwargs)
        
-    def chart_data_filter_region_index_resolution_json_get(
+    def chart_data_timestamps(
     self, filter, region, resolution, **kwargs
     ):
         """
@@ -601,16 +599,11 @@ class DownloadAPI(object):
             _host_index (int/None): specifies the index of the server
                 that we want to use.
                 Default is read from the configuration.
-            _request_auths (list): set to override the auth_settings for an a single
-                request; this effectively ignores the authentication
-                in the spec for a single request.
-                Default is None
             async_req (bool): execute request asynchronously
 
         Returns:
             Indices
-                If the method is called asynchronously, returns the request
-                thread.
+                If the method is called asynchronously, returns the request thread.
         """
         kwargs["async_req"] = kwargs.get("async_req", False)
         kwargs["_return_http_data_only"] = kwargs.get("_return_http_data_only", True)
@@ -621,40 +614,46 @@ class DownloadAPI(object):
         kwargs["_spec_property_naming"] = kwargs.get("_spec_property_naming", False)
         kwargs["_content_type"] = kwargs.get("_content_type")
         kwargs["_host_index"] = kwargs.get("_host_index")
-        #kwargs["_request_auths"] = kwargs.get("_request_auths", None)
         kwargs["filter"] = filter
         kwargs["region"] = region
         kwargs["resolution"] = resolution
-        return self.chart_data_filter_region_index_resolution_json_get_endpoint.call_with_http_info(
+        return self.chart_data_timestamps_endpoint.call_with_http_info(
             **kwargs)
 
-    def download_chart_data(self, filter, filter_copy, region_copy, timestamp, region="DE", resolution="day", **kwargs):
+    def download_chart_data(self, filter, filter_copy, region, region_copy, timestamp=None, resolution="day" , **kwargs):
         """
-        Downloads the data and returns it as a Pandas DataFrame.
+        Downloads the data and returns it as a Pandas DataFrame. It also converts the timestamp into date. 
         Returns:
             If the data was successfully downloaded a DataFrame is returned. Otherwise - None. 
         """
         try:
-            # Get all available timestamps at once 
-            timestamps_response = self.chart_data_filter_region_index_resolution_json_get(filter, region, resolution, **kwargs)
+            # Get all available timestamps for a given combination of arguments at once 
+            timestamps_response = self.chart_data_timestamps(filter, region, resolution, **kwargs)
             timestamps = timestamps_response.get('timestamps', [])
             # Download data for each timestamp using for loop 
-                #creating an empty list 
-            dfs = []
+                #creating an empty list for storage of dataframes
+            list_dfs = []
                 #for loop -getting data for each timestamp 
             for timestamp in timestamps:
                 #API request
-                response = self.chart_data_filter_region_filter_copy_region_copy_resolution_timestamp_json_get(
+                response = self.chart_data_API_request(
                     filter, filter_copy, region_copy, timestamp, region, resolution, **kwargs
                 )
                 #processing the API response 
-                json_data_dic = eval(response.to_str())
-                series_data = json_data_dic.get('series', [])
+                json_response = eval(response.to_str())
+                series_data = json_response.get('series', [])
                 df = pd.DataFrame(series_data, columns=['timestamp', 'value'])
                 #append to the list
-                dfs.append(df)
+                list_dfs.append(df)
+
+                # Convert timestamp to date
+                df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
+                df['date'] = df['timestamp'].dt.date
+                # Append the DataFrame to the list
+                list_dfs.append(df)
+
             # All timestamps into one Dataframe using concatenate function 
-            result_df = pd.concat(dfs, ignore_index=True)
+            result_df = pd.concat(list_dfs, ignore_index=True)
             
             return result_df
         except Exception as e:
@@ -667,10 +666,6 @@ config = Configuration(host="https://www.smard.de/app", discard_unknown_keys=Tru
 api_client = ApiClient(config)
 download_api = DownloadAPI(api_client)
 
-Electricity_gen_brown_coal = download_api.download_chart_data(filter=1223, filter_copy=1223, region_copy="DE", timestamp=None)
-print(Electricity_gen_brown_coal.head(10))
-print(Electricity_gen_brown_coal.size)
-
-
-
+Electricity_gen_brown_coal = download_api.download_chart_data(filter=1223, filter_copy=1223,region="DE", region_copy="DE")
+print(Electricity_gen_brown_coal)
 
