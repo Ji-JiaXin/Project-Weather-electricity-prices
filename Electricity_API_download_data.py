@@ -675,21 +675,27 @@ config = Configuration(host="https://www.smard.de/app", discard_unknown_keys=Tru
 api_client = ApiClient(config)
 download_api = DownloadAPI(api_client)
 
-Electricity_gen_brown_coal = download_api.download_chart_data(filter=1223, filter_copy=1223,region="DE", region_copy="DE")
-print(Electricity_gen_brown_coal)
+Elcet_gen_onshore_wind = download_api.download_chart_data(filter=4067, filter_copy=4067,region="DE", region_copy="DE")
 
-Electricity_gen_brown_coal['timestamp'] = pd.to_datetime(Electricity_gen_brown_coal['timestamp'])
 
-Electricity_gen_brown_coal = Electricity_gen_brown_coal.sort_values(by='timestamp')
+Elcet_gen_onshore_wind['date'] = pd.to_datetime(Elcet_gen_onshore_wind['date'])
 
-Electricity_gen_brown_coal.to_csv('Electricity_gen_brown_coal.csv', index=False)
+Elcet_gen_onshore_wind = Elcet_gen_onshore_wind.sort_values(by='date')
+Elcet_gen_onshore_wind = Elcet_gen_onshore_wind.reset_index(drop=True)
 
-# Find the index of the first occurrence of NA in 'Values' column
-#first_na_index = df['Values'].first_valid_index()
 
-# If there's at least one NA value, get the corresponding date
-#if first_na_index is not None:
- #   date_of_first_na = df.loc[first_na_index, 'Date']
-  #  print("The first NA value starts from the date:", date_of_first_na)
-#else:
-#    print("There are no NA values in the 'Values' column.")
+# Filtering out rows where 'values' is not Null or NaN/NA
+df_not_null_or_na = Elcet_gen_onshore_wind[Elcet_gen_onshore_wind['value'].notna()]
+
+# Finding the last date with a non-null or non-NA/Nan value
+last_date_with_value = df_not_null_or_na['date'].max()
+last_date_with_value = last_date_with_value.strftime('%Y-%m-%d')
+print("Our last avaivable data are form:", last_date_with_value)
+
+# Erasing rows for which we don't have a value Value
+Elcet_gen_onshore_wind = Elcet_gen_onshore_wind[Elcet_gen_onshore_wind['date'] <= last_date_with_value]
+
+print(Elcet_gen_onshore_wind)
+
+Elcet_gen_onshore_wind.to_csv('Elcet_gen_onshore_wind.csv', index=False)
+
