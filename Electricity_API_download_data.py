@@ -1,6 +1,7 @@
-#start by downloading the package
-pip install deutschland[smard]
-poetry add deutschland -E smard
+# start by downloading the package
+# pip install deutschland[smard]
+# poetry add deutschland -E smard
+
 #import package
 from deutschland import smard
 
@@ -677,3 +678,18 @@ download_api = DownloadAPI(api_client)
 Electricity_gen_brown_coal = download_api.download_chart_data(filter=1223, filter_copy=1223,region="DE", region_copy="DE")
 print(Electricity_gen_brown_coal)
 
+Electricity_gen_brown_coal['timestamp'] = pd.to_datetime(Electricity_gen_brown_coal['timestamp'])
+
+Electricity_gen_brown_coal = Electricity_gen_brown_coal.sort_values(by='timestamp')
+
+Electricity_gen_brown_coal.to_csv('Electricity_gen_brown_coal.csv', index=False)
+
+# Find the index of the first occurrence of NA in 'Values' column
+#first_na_index = df['Values'].first_valid_index()
+
+# If there's at least one NA value, get the corresponding date
+#if first_na_index is not None:
+ #   date_of_first_na = df.loc[first_na_index, 'Date']
+  #  print("The first NA value starts from the date:", date_of_first_na)
+#else:
+#    print("There are no NA values in the 'Values' column.")
