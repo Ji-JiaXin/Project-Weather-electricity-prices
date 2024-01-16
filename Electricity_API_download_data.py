@@ -695,7 +695,17 @@ print("Our last avaivable data are form:", last_date_with_value)
 # Erasing rows for which we don't have a value Value
 Elcet_gen_onshore_wind = Elcet_gen_onshore_wind[Elcet_gen_onshore_wind['date'] <= last_date_with_value]
 
+del Elcet_gen_onshore_wind['date']
+
+# Convert the 'timestamp' column to datetime
+Elcet_gen_onshore_wind['timestamp'] = pd.to_datetime(Elcet_gen_onshore_wind['timestamp'])
+
+# Extract only the date part
+Elcet_gen_onshore_wind['timestamp'] = Elcet_gen_onshore_wind['timestamp'].dt.date
+
+Elcet_gen_onshore_wind.rename(columns={'timestamp': 'Date', 'value': 'Values'}, inplace=True)
+
 print(Elcet_gen_onshore_wind)
 
-Elcet_gen_onshore_wind.to_csv('Elcet_gen_onshore_wind.csv', index=False)
 
+Elcet_gen_onshore_wind.to_csv('Elcet_gen_onshore_wind.csv', index=False, encoding='windows-1252')
