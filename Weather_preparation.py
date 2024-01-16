@@ -104,4 +104,4 @@ merged_weather['Date'] = merged_weather['Date'].dt.strftime('%Y-%m-%d')
 
 print(merged_weather)
 
-merged_weather.to_csv('Weather data', index = False, encoding='windows-1252')
+merged_weather.to_csv('Weather_data', index = False, encoding='windows-1252')
