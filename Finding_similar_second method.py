@@ -16,33 +16,27 @@ print("New working directory:", os.getcwd())
 
 def find_similar_temperature_periods(input_temperatures, data, threshold):
     """
-    Find all 7-day periods in the data where the temperatures are similar to the given input temperatures within a threshold.
-    
-    Parameters:
-    input_temperatures (list of float): A list of 7 temperatures.
-    data (pd.DataFrame): The dataframe with the temperature data.
-    threshold (float): The maximum allowed sum of squared differences to consider periods as similar.
-
-    Returns:
-    list of pd.DataFrame: A list of dataframes, each representing a 7-day period with similar temperatures.
+    Function takes the data from input, search whole dataset
+      and find time periods with similar temperatures.
+      You can adjust the threshold for setting the similarity, too.
     """
     if len(input_temperatures) != 7:
         raise ValueError("Input temperatures must be a list of 7 numbers.")
 
-    #initializing an empty list
+    #initializing an empty list for stucking the similar periods
     similar_periods = []
 
     # Iterating through the 'Data' and checking 7-day periods
     for i in range(len(data) - 6):
         """ For each period, calculate the sum of square diff. between
-           # Temperatures and input numbers
+            Temperatures and input Temperatures
            """
         current_period = data.iloc[i:i+7]
         current_temperatures = current_period['Temperature'].tolist()
         diff = sum((np.array(current_temperatures) - np.array(input_temperatures))**2)
 
         """ If the sum is less then 'treshold' then add the time period
-        to the 'similar time periods
+        to the Similar time periods
         """
         if diff <= threshold:
             similar_periods.append(current_period)
@@ -50,32 +44,44 @@ def find_similar_temperature_periods(input_temperatures, data, threshold):
     return similar_periods
 
 def get_temperature_input():
+    """
+    Function created for collecting the input.
+    Taking first 7 numbers as temperature values and the last 8th as the threshold.
+    """
     while True:
         try:
-            input_string = input("Enter 7 temperatures separated by commas: ")
-            temperatures = [float(temp.strip()) for temp in input_string.split(",")]
+            # Prompting for 7 temperatures and an additional number for the threshold
+            input_string = input("Enter 7 temperatures followed by a threshold, all separated by commas: ")
+            input_numbers = [float(num.strip()) for num in input_string.split(",")]
 
-            # Check if there is exactly 7 numbers input
-            if len(temperatures) != 7:
-                raise ValueError("Exactly 7 temperatures are required.")
-            
-            return temperatures
-        # If you do not enter the correct input, Error output
+            # Checking if there are exactly 8 numbers (7 temperatures + 1 threshold)
+            if len(input_numbers) != 8:
+                raise ValueError("Exactly 7 temperatures and 1 threshold are required.")
+
+            # Separating the temperatures and the threshold
+            temperatures = input_numbers[:7]
+            threshold = input_numbers[7]
+
+            return temperatures, threshold
         except ValueError as e:
-            print("Invalid input. Please enter 7 numbers separated by commas. Error:", e)
+            # Handling invalid input
+            print("Invalid input. Please enter 7 temperatures and 1 threshold, all separated by commas. Error:", e)
+
+
 
 # Load the merged file
-file_path = 'merged_file.csv'  # Replace with the actual path to your file
+file_path = 'merged_file.csv'
 merged_data = pd.read_csv(file_path)
-tolerance = 5
-# Prompt user for temperature input
-input_temperatures = get_temperature_input()
+
+
+# Example usage
+input_temperatures, threshold = get_temperature_input()
 
 # Find similar temperature periods
-similar_periods = find_similar_temperature_periods(input_temperatures, merged_data, threshold=tolerance)
+similar_periods = find_similar_temperature_periods(input_temperatures, merged_data, threshold)
 
 if similar_periods == []:
-    print("We have found NO similar periods")
+    print("We have found NO similar periods.You are to strict. Try to set higer threshold (8th number in the input).")
 
 for index, period in enumerate(similar_periods):
 
