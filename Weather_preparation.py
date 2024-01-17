@@ -1,22 +1,21 @@
-# Weather preparation
+##  Weather preparation
 import os
 import pandas as pd
 
 # Path to the new working directory
 new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
 
-# Change the current working directory
+# Changing the current working directory
 os.chdir(new_directory)
 
-# Verify the change
+# Verifing the change
 print("New working directory:", os.getcwd())
 
+# Path to my Excel file. (If the souse file is not in Excel format, need to adjust the next command)
+file_path = 'Weather_base.xlsx'  
 
-
-# Path to your Excel file
-file_path = 'Weather_base.xlsx'  # Replace with your file path
-
-# Read the 'Average temperature' sheet
+# Read the 'Average temperature' sheet from file containing data about weather.
+# If the data sourse is not in Excel format, need to use 'pd.read_csv() or different way'
 df = pd.read_excel(file_path, sheet_name='Average temperature')
 
 # Drop the first three rows which contain metadata and headers
@@ -26,6 +25,7 @@ df_transformed = df.drop([0, 1, 2])
 df_transformed.columns = ['Year', 'Month'] + list(range(1, 32))
 
 # Melt the dataframe to create two columns: one for dates, one for temperatures
+# Nedd to transform data to standartize frame
 df_melted = df_transformed.melt(id_vars=['Year', 'Month'], value_vars=list(range(1, 32)), 
                                 var_name='Day', value_name='Temperature')
 
