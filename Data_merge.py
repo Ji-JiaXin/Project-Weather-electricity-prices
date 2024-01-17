@@ -13,11 +13,11 @@ print("New working directory:", os.getcwd())
 
 # Replace with your actual file paths
 weather_data = 'Weather_data' 
-Elcet_gen_onshore_wind = 'Elcet_gen_onshore_wind.csv'
+Value = 'Value.csv'
 
 # Load the files
 data_1 = pd.read_csv(weather_data)
-data_2 = pd.read_csv(Elcet_gen_onshore_wind)
+data_2 = pd.read_csv(Value)
 
 # Merge the files on the 'Date' column
 merged_data = pd.merge(data_1, data_2, on='Date', how='inner')

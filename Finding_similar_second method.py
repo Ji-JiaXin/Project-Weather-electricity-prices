@@ -14,7 +14,7 @@ os.chdir(new_directory)
 print("New working directory:", os.getcwd())
 
 
-def find_similar_temperature_periods(input_temperatures, data, threshold=10):
+def find_similar_temperature_periods(input_temperatures, data, threshold):
     """
     Find all 7-day periods in the data where the temperatures are similar to the given input temperatures within a threshold.
     
@@ -29,13 +29,21 @@ def find_similar_temperature_periods(input_temperatures, data, threshold=10):
     if len(input_temperatures) != 7:
         raise ValueError("Input temperatures must be a list of 7 numbers.")
 
+    #initializing an empty list
     similar_periods = []
 
+    # Iterating through the 'Data' and checking 7-day periods
     for i in range(len(data) - 6):
+        """ For each period, calculate the sum of square diff. between
+           # Temperatures and input numbers
+           """
         current_period = data.iloc[i:i+7]
         current_temperatures = current_period['Temperature'].tolist()
         diff = sum((np.array(current_temperatures) - np.array(input_temperatures))**2)
 
+        """ If the sum is less then 'treshold' then add the time period
+        to the 'similar time periods
+        """
         if diff <= threshold:
             similar_periods.append(current_period)
 
@@ -47,22 +55,29 @@ def get_temperature_input():
             input_string = input("Enter 7 temperatures separated by commas: ")
             temperatures = [float(temp.strip()) for temp in input_string.split(",")]
 
+            # Check if there is exactly 7 numbers input
             if len(temperatures) != 7:
                 raise ValueError("Exactly 7 temperatures are required.")
             
             return temperatures
+        # If you do not enter the correct input, Error output
         except ValueError as e:
             print("Invalid input. Please enter 7 numbers separated by commas. Error:", e)
 
 # Load the merged file
 file_path = 'merged_file.csv'  # Replace with the actual path to your file
 merged_data = pd.read_csv(file_path)
-
+tolerance = 5
 # Prompt user for temperature input
 input_temperatures = get_temperature_input()
 
 # Find similar temperature periods
-similar_periods = find_similar_temperature_periods(input_temperatures, merged_data, threshold=10)
+similar_periods = find_similar_temperature_periods(input_temperatures, merged_data, threshold=tolerance)
+
+if similar_periods == []:
+    print("We have found NO similar periods")
+
 for index, period in enumerate(similar_periods):
-    
+
     print(f"Similar period {index + 1}:\n", period, "\n")
+    print("We have found", index + 1, "similar periods")
