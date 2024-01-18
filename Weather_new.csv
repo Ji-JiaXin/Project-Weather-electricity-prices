@@ -1,14 +1,4 @@
-location,Basilej
-lat,47.75000
-lon,7.50000
-asl,363.653
-variable,Temperature
-unit,°C
-level,2 m elevation corrected
-resolution,hourly
-aggregation,None
-timestamp,Basilej Temperature [2 m elevation corrected]
-20221231T0000,15.210245
+,
 20221231T0100,15.270246
 20221231T0200,15.240245
 20221231T0300,14.840245

@@ -48,7 +48,6 @@ Weather_base = df_melted[['Date', 'Temperature']].sort_values(by='Date')
 
 
 Weather_new = pd.read_csv('Weather_new.csv')
-Weather_new = Weather_new.iloc[10:]
 Weather_new.columns = ['Date', 'Temperature']
 # Convert the 'Date' column to datetime format
 Weather_new['Date'] = pd.to_datetime(Weather_new['Date'], format='%Y%m%dT%H%M')
@@ -104,4 +103,4 @@ merged_weather['Date'] = merged_weather['Date'].dt.strftime('%Y-%m-%d')
 
 print(merged_weather)
 
-merged_weather.to_csv('Weather_data', index = False, encoding='windows-1252')
+merged_weather.to_csv('Weather_data.csv', index = False, encoding='windows-1252')
