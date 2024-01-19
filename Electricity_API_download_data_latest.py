@@ -558,7 +558,3 @@ print(Elect_gen_offshore_wind)
 
 #exporting the DataFrame as csv into present working directory 
 #Elect_gen_onshore_wind.to_csv('Elect_gen_onshore_wind.csv', index=False, encoding='windows-1252')
-
-#hhhhhhhhhhhhhhhhhhhh
-##
-222#########
