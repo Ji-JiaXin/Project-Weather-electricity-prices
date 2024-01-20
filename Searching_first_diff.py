@@ -8,7 +8,8 @@ import numpy as np
 
 # preparign the data
 # Path to the new working directory
-new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
+#new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
+#new_directory = "c:\Users\jijia\OneDrive\Desktop\Project_ python\Project-Weather-electricity-prices"
 
 # Change the current working directory
 os.chdir(new_directory)
