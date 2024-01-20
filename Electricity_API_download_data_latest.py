@@ -218,66 +218,25 @@ class DownloadAPI(object):
 
         Parameters:
             filter(int)
-                 * `1223` - Electricity generation: Brown coal (Lignite) 
-                 * `1224` - Electricity generation: Nuclear energy
-                 * `1225` - Electricity generation: Offshore wind   
-                 * `1226` - Electricity generation: Hydropower   
-                 * `1227` - Electricity generation: Other Conventional   
-                 * `1228` - Electricity generation: Other renewables   
-                 * `4066` - Electricity generation: Biomass   
-                 * `4067` - Electricity generation: Onshore wind   
-                 * `4068` - Electricity generation: Photovoltaics   
-                 * `4069` - Electricity generation: Hard coal   
-                 * `4070` - Electricity generation: Pumped storage   
-                 * `4071` - Electricity generation: Natural gas
-                 * `410` - Electricity consumption: Total (grid load)   
-                 * `4359` - Electricity consumption: Residual load   
-                 * `4387` - Electricity consumption: Pumped storage   
-                 * `4169` - Market price: Germany/Luxembourg   
-                 * `5078` - Market price: neighbors DE/LU   
-                 * `4996` - Market price: Belgium   
-                 * `4997` - Market price: Norway 2   
-                 * `4170` - Market price: Austria   
-                 * `252` - Market price: Denmark 1   
-                 * `253` - Market price: Denmark 2   
-                 * `254` - Market price: France   
-                 * `255` - Market price: Italy (North)   
-                 * `256` - Market price: Netherlands   
-                 * `257` - Market price: Poland   
-                 * `258` - Market price: Poland   
-                 * `259` - Market price: Switzerland  
-                 * `260` - Market price: Slovenia   
-                 * `261` - Market price: Czech Republic   
-                 * `262` - Market price: Hungary
-                 * `3791` - Forecasted generation: Offshore   
-                 * `123` - Forecast generation: Onshore   
-                 * `125` - Forecast generation: Photovoltaic   
-                 * `715` - Forecast generation: Other   
-                 * `5097` - Forecast generation: Wind and photovoltaic   
-                 * `122` - Forecast generation: Total
+                 `1223` - Electricity generation: Brown coal (Lignite),`1224` - Electricity generation: Nuclear energy,`1225` - Electricity generation: Offshore wind, `1226` - Electricity generation: Hydropower,
+                 `1227` - Electricity generation: Other Conventional, `1228` - Electricity generation: Other renewables, `4066` - Electricity generation: Biomass, `4067` - Electricity generation: Onshore wind, 
+                 `4068` - Electricity generation: Photovoltaics, `4069` - Electricity generation: Hard coal, `4070` - Electricity generation: Pumped storage, `4071` - Electricity generation: Natural gas, 
+                 `410` - Electricity consumption: Total (grid load), `4359` - Electricity consumption: Residual load, `4387` - Electricity consumption: Pumped storage, 
+                 `4169` - Market price: Germany/Luxembourg, `5078` - Market price: neighbors DE/LU, `4996` - Market price: Belgium, `4997` - Market price: Norway 2, 
+                 `4170` - Market price: Austria, `252` - Market price: Denmark 1, `253` - Market price: Denmark 2, `254` - Market price: France, `255` - Market price: Italy (North), 
+                 `256` - Market price: Netherlands, `257` - Market price: Poland, `258` - Market price: Poland,`259` - Market price: Switzerland, `260` - Market price: Slovenia, 
+                 `261` - Market price: Czech Republic, `262` - Market price: Hungary, `3791` - Forecasted generation: Offshore, `123` - Forecast generation: Onshore, 
+                 `125` - Forecast generation: Photovoltaic, `715` - Forecast generation: Other, `5097` - Forecast generation: Wind and photovoltaic, `122` - Forecast generation: Total
             filter_copy(int) - same as filter(), it must be filled due to wrong API design from creators
             region(str) - defaultly set as "DE"
                 Country / control area / market area:   
-                * `DE` - Country: Germany   
-                * `AT` - Country: Austria   
-                * `LU` - Country: Luxembourg   
-                * `DE-LU` - Market area: DE/LU (from 01.10.2018)   
-                * `DE-AT-LU` - Market area: DE/AT/LU (until 30.09.2018)   
-                * 50Hertz - control area (DE): 50Hertz   
-                * `Amprion` - control area (DE): Amprion   
-                * `TenneT` - control area (DE): TenneT   
-                * TransnetBW` - Control area (DE): TransnetBW   
-                * `APG` - Control area (AT): APG   
-                * `Creos` - Control area (LU): Creos
+                `DE` - Country: Germany, `AT` - Country: Austria, `LU` - Country: Luxembourg, `DE-LU` - Market area: DE/LU (from 01.10.2018),
+                `DE-AT-LU` - Market area: DE/AT/LU (until 30.09.2018), 50Hertz - control area (DE): 50Hertz, `Amprion` - control area (DE): Amprion, 
+                `TenneT` - control area (DE): TenneT, TransnetBW` - Control area (DE): TransnetBW, `APG` - Control area (AT): APG, `Creos` - Control area (LU): Creos
             region_copy(str) - same as region(), it must be filled due to wrong API design from creators
             timestamp(integer)
             resolution(str) - resolution of the data, defaultly as "hour"   
-                * `hour` - Hourly 
-                * `quarterhour` - Quarterhourly 
-                * `day` - Daily 
-                * `weekly` - Weekly 
-                * `monthly` - Monthly 
-                * `yearly` - Yearly
+                `hour` - Hourly, `quarterhour` - Quarterhourly, `day` - Daily, `weekly` - Weekly, `monthly` - Monthly, `yearly` - Yearly
             **kwargs
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -341,63 +300,22 @@ class DownloadAPI(object):
 
         Args:
             filter(int)
-                 * `1223` - Electricity generation: Brown coal (Lignite) 
-                 * `1224` - Electricity generation: Nuclear energy
-                 * `1225` - Electricity generation: Offshore wind   
-                 * `1226` - Electricity generation: Hydropower   
-                 * `1227` - Electricity generation: Other Conventional   
-                 * `1228` - Electricity generation: Other renewables   
-                 * `4066` - Electricity generation: Biomass   
-                 * `4067` - Electricity generation: Onshore wind   
-                 * `4068` - Electricity generation: Photovoltaics   
-                 * `4069` - Electricity generation: Hard coal   
-                 * `4070` - Electricity generation: Pumped storage   
-                 * `4071` - Electricity generation: Natural gas
-                 * `410` - Electricity consumption: Total (grid load)   
-                 * `4359` - Electricity consumption: Residual load   
-                 * `4387` - Electricity consumption: Pumped storage   
-                 * `4169` - Market price: Germany/Luxembourg   
-                 * `5078` - Market price: neighbors DE/LU   
-                 * `4996` - Market price: Belgium   
-                 * `4997` - Market price: Norway 2   
-                 * `4170` - Market price: Austria   
-                 * `252` - Market price: Denmark 1   
-                 * `253` - Market price: Denmark 2   
-                 * `254` - Market price: France   
-                 * `255` - Market price: Italy (North)   
-                 * `256` - Market price: Netherlands   
-                 * `257` - Market price: Poland   
-                 * `258` - Market price: Poland   
-                 * `259` - Market price: Switzerland  
-                 * `260` - Market price: Slovenia   
-                 * `261` - Market price: Czech Republic   
-                 * `262` - Market price: Hungary
-                 * `3791` - Forecasted generation: Offshore   
-                 * `123` - Forecast generation: Onshore   
-                 * `125` - Forecast generation: Photovoltaic   
-                 * `715` - Forecast generation: Other   
-                 * `5097` - Forecast generation: Wind and photovoltaic   
-                 * `122` - Forecast generation: Total
+                `1223` - Electricity generation: Brown coal (Lignite),`1224` - Electricity generation: Nuclear energy,`1225` - Electricity generation: Offshore wind, `1226` - Electricity generation: Hydropower,
+                `1227` - Electricity generation: Other Conventional, `1228` - Electricity generation: Other renewables, `4066` - Electricity generation: Biomass, `4067` - Electricity generation: Onshore wind, 
+                `4068` - Electricity generation: Photovoltaics, `4069` - Electricity generation: Hard coal, `4070` - Electricity generation: Pumped storage, `4071` - Electricity generation: Natural gas, 
+                `410` - Electricity consumption: Total (grid load), `4359` - Electricity consumption: Residual load, `4387` - Electricity consumption: Pumped storage, 
+                `4169` - Market price: Germany/Luxembourg, `5078` - Market price: neighbors DE/LU, `4996` - Market price: Belgium, `4997` - Market price: Norway 2, 
+                `4170` - Market price: Austria, `252` - Market price: Denmark 1, `253` - Market price: Denmark 2, `254` - Market price: France, `255` - Market price: Italy (North), 
+                `256` - Market price: Netherlands, `257` - Market price: Poland, `258` - Market price: Poland,`259` - Market price: Switzerland, `260` - Market price: Slovenia, 
+                `261` - Market price: Czech Republic, `262` - Market price: Hungary, `3791` - Forecasted generation: Offshore, `123` - Forecast generation: Onshore, 
+                `125` - Forecast generation: Photovoltaic, `715` - Forecast generation: Other, `5097` - Forecast generation: Wind and photovoltaic, `122` - Forecast generation: Total
             region(str) - defaultly set as "DE"
-                Country / control area / market area:   
-                * `DE` - Country: Germany   
-                * `AT` - Country: Austria   
-                * `LU` - Country: Luxembourg   
-                * `DE-LU` - Market area: DE/LU (from 01.10.2018)   
-                * `DE-AT-LU` - Market area: DE/AT/LU (until 30.09.2018)   
-                * 50Hertz - control area (DE): 50Hertz   
-                * `Amprion` - control area (DE): Amprion   
-                * `TenneT` - control area (DE): TenneT   
-                * TransnetBW` - Control area (DE): TransnetBW   
-                * `APG` - Control area (AT): APG   
-                * `Creos` - Control area (LU): Creos
+                Country / control area / market area:
+                `DE` - Country: Germany, `AT` - Country: Austria, `LU` - Country: Luxembourg, `DE-LU` - Market area: DE/LU (from 01.10.2018),
+                `DE-AT-LU` - Market area: DE/AT/LU (until 30.09.2018), 50Hertz - control area (DE): 50Hertz, `Amprion` - control area (DE): Amprion, 
+                `TenneT` - control area (DE): TenneT, TransnetBW` - Control area (DE): TransnetBW, `APG` - Control area (AT): APG, `Creos` - Control area (LU): Creos
             resolution(str) - resolution of the data, defaultly as "hour"   
-                * `hour` - Hourly 
-                * `quarterhour` - Quarterhourly 
-                * `day` - Daily 
-                * `weekly` - Weekly 
-                * `monthly` - Monthly 
-                * `yearly` - Yearly
+                `hour` - Hourly, `quarterhour` - Quarterhourly, `day` - Daily, `weekly` - Weekly, `monthly` - Monthly, `yearly` - Yearly
         Keyword Args:
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
@@ -558,3 +476,4 @@ print(Elect_gen_offshore_wind)
 
 #exporting the DataFrame as csv into present working directory 
 #Elect_gen_onshore_wind.to_csv('Elect_gen_onshore_wind.csv', index=False, encoding='windows-1252')
+
