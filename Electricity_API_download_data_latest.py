@@ -9,7 +9,6 @@ from deutschland import smard
 
 #importing packages
 import pandas as pd
-import requests
 
 from deutschland.smard import Configuration
 from deutschland.smard.api_client import ApiClient
@@ -34,6 +33,7 @@ class DownloadAPI(object):
     market spot prices (DE, BE, AT, NO, DK, FR, NL, PL, CH, SI, CZ, HU)
     and forecast generation (onshore, photovoltaics, wind and photocoltaics, total). 
     It downloads the data based on inputed parameters for specific filter, region, resultion and timestamp, converts it into nice clean Pandas DataFrame.
+    The first part of the code was inspired by github repository https://github.com/bundesAPI/smard-api/tree/main. Changes were made to make the code work for our project. 
     ....
 
     Attributes
