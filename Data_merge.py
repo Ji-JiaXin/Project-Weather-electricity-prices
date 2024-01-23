@@ -1,5 +1,7 @@
 ## Merginf the data about weather and from the API
 
+#zabalit do funkce jedne 
+
 import pandas as pd
 import os
 

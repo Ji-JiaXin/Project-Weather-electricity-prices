@@ -465,7 +465,6 @@ config = Configuration(host="https://www.smard.de/app", discard_unknown_keys=Tru
 api_client = ApiClient(config)
 download_api = DownloadAPI(api_client)
 
-
 #downloading example data 
 Elect_gen_onshore_wind = download_api.download_chart_data(filter=4067, filter_copy=4067,region="DE", region_copy="DE")
 print(Elect_gen_onshore_wind)
