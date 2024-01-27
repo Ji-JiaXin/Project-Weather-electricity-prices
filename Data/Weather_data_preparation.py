@@ -1,16 +1,4 @@
-# Weather prep
-import os
 import pandas as pd
-
-# Path to the new working directory
-new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Data"
-
-# Changing the current working directory
-os.chdir(new_directory)
-
-# Verifing the change
-print("New working directory:", os.getcwd())
-
 
 def process_and_merge_weather_data(file_path, csv_file_path):
     # Read the 'Average temperature' sheet from the Excel file
@@ -65,14 +53,6 @@ def process_and_merge_weather_data(file_path, csv_file_path):
     # Convert and format the 'Date' column in merged DataFrame
     merged_weather['Date'] = pd.to_datetime(merged_weather['Date'])
     merged_weather['Date'] = merged_weather['Date'].dt.strftime('%Y-%m-%d')
-
-    # Print the final DataFrame
-    print(merged_weather)
+    
 
     merged_weather.to_csv('Weather_data.csv', index = False, encoding='windows-1252')
-
-# Usage example (assuming you have a base DataFrame 'Weather_base' and a path to your CSV file):
-file_path = 'Weather_base.xlsx'  
-csv_file_path = 'Weather_new.csv'  # Replace with your actual file path
-process_and_merge_weather_data(file_path, csv_file_path)
-
