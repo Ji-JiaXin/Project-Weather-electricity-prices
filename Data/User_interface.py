@@ -35,7 +35,8 @@ def retrieve_input():
 
     input_value_threshold = entry_var_threshold.get()
     input_row.append(input_value_threshold)
-    print("The entered value is:", input_row)
+    #print("The entered value is:", input_row)
+
 
 root = customtkinter.CTk()
 root.geometry("400x680")

@@ -1,10 +1,17 @@
 #importing necessary packages
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+# Path to the new working directory
+new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Data"
+
+# Changing the current working directory
+os.chdir(new_directory)
+
 # Loading the merged file
-file_path = 'merged_file.csv'
+file_path = 'merged_data.csv'
 df = pd.read_csv(file_path)
 #print(df)
 

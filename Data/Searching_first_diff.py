@@ -71,7 +71,7 @@ def get_temperature_input():
             # Separating the temperatures and the threshold
             temperatures = input_numbers[:7]
             threshold = input_numbers[7]
-
+            print(temperatures)
             return temperatures, threshold
         except ValueError as e:
             # Handling invalid input, reminding the input has to be comma seperated
