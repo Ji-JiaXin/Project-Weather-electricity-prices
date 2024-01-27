@@ -1,7 +1,14 @@
 # Run try
+
+# Example input: 5, 6, 7, 8, 2, 4, 2, 7
+
 # Weather prep
+
 import os
 import pandas as pd
+from Weather_data_preparation import *
+from Data_merge import *
+
 
 # Path to the new working directory
 new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Data"
@@ -13,10 +20,10 @@ os.chdir(new_directory)
 print("New working directory:", os.getcwd())
 
 
-file_path = 'Weather_base.xlsx'  
-csv_file_path = 'Weather_new.csv'  # Replace with your actual file path
+file_path = 'Weather_base.xlsx'    # Replace with your actual file path
+csv_file_path = 'Weather_new.csv'  # Same
 
-from Weather_data_preparation import *
+
 
 process_and_merge_weather_data(file_path, csv_file_path)
 
@@ -26,12 +33,9 @@ weather_data_path = 'weather_data.csv'
 value_data_path = 'Value.csv'      
 output_file_path = 'merged_data.csv'           
 
-from Data_merge import *
-
 merge_and_process_data(weather_data_path, value_data_path, output_file_path)
 
-
-
+from Searching_first_diff import *
 
 
 

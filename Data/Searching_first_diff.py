@@ -8,7 +8,7 @@ import numpy as np
 
 # preparign the data
 # Path to the new working directory
-new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
+new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Data"
 #new_directory = "c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices"
 
 # Change the current working directory
@@ -16,18 +16,6 @@ os.chdir(new_directory)
 
 # Verify the change
 print("New working directory:", os.getcwd())
-
-
-# Loading the merged file
-file_path = 'merged_file.csv'
-df = pd.read_csv(file_path)
-
-# Converting 'Date' to datetime just to be sure
-df['Date'] = pd.to_datetime(df['Date'])
-
-# Calculating the first difference of the 'Temperature' column
-df['Temperature_Diff'] = df['Temperature'].diff()
-df['Temperature_Diff'].fillna(0, inplace=True)
 
 
 def searching_difference(input_temperatures, data, threshold):
@@ -46,6 +34,9 @@ def searching_difference(input_temperatures, data, threshold):
     # Initializing an empty list for stacking the similar periods
     similar_periods = []
 
+    # Adding a Temperature_Diff column to the merged_data
+    merged_data['Temperature_Diff'] = merged_data['Temperature'].diff().fillna(0)
+    
     # Iterating through the 'Data' and checking 6-day periods (since we're comparing differences)
     for i in range(len(data) - 5):
         # For each period, calculate the sum of squared differences between
@@ -59,6 +50,8 @@ def searching_difference(input_temperatures, data, threshold):
             similar_periods.append(current_period)
 
     return similar_periods
+
+
 # The rest works the same as in Sqr diff calculation
 def get_temperature_input():
     """
@@ -84,13 +77,8 @@ def get_temperature_input():
             # Handling invalid input, reminding the input has to be comma seperated
             print("Invalid input. Please enter 7 temperatures and 1 threshold, all separated by commas. Error:", e)
 
-
 # Loading the merged file
-file_path = 'merged_file.csv'
-merged_data = pd.read_csv(file_path)
-
-# Adding a Temperature_Diff column to the merged_data
-merged_data['Temperature_Diff'] = merged_data['Temperature'].diff().fillna(0)
+merged_data = pd.read_csv('merged_data.csv')
 
 # Setting the values of the variables
 input_temperatures, threshold = get_temperature_input()
@@ -103,4 +91,6 @@ if similar_periods == []:
 
 for index, period in enumerate(similar_periods):
     print(f"Similar period {index + 1}:\n", period, "\n")
-    print("We have found", index + 1, "similar periods")
+
+print('We have found',len(similar_periods),'similar periods')
+
