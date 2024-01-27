@@ -1,44 +1,39 @@
-## Merginf the data about weather and from the API
-
-#zabalit do funkce jedne 
-
-import pandas as pd
 import os
+import pandas as pd
 
-# Path to the new working directory, can be adjust as needed
-new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
+# Path to the new working directory
+new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Data"
 
-# Change the current working directory
+# Changing the current working directory
 os.chdir(new_directory)
 
-# Verify the change
+# Verifing the change
 print("New working directory:", os.getcwd())
 
-# Replaceable as needed
-weather_data = 'Weather_data' 
-Value = 'Value.csv'
+def merge_and_process_data(weather_data_path, value_data_path, output_file_path):
+    # Loading the files
+    data_1 = pd.read_csv(weather_data_path)
+    data_2 = pd.read_csv(value_data_path)
 
-# Loading the files
-data_1 = pd.read_csv(weather_data)
-data_2 = pd.read_csv(Value)
+    # Merge the files on the 'Date' column
+    merged_data = pd.merge(data_1, data_2, on='Date', how='inner')
 
-# Merge the files on the 'Date' column
-# Data for certain day have to be connected together
-merged_data = pd.merge(data_1, data_2, on='Date', how='inner')
+   
 
-# Checking the data
-print(merged_data)
+    # Remove duplicate rows and group by the 'Date' column, averaging the values
+    merged_data = merged_data.drop_duplicates()
+    merged_data = merged_data.groupby('Date', as_index=False).mean()
+    merged_data['Temperature'] = merged_data['Temperature'].round(1)
+    
+    # Checking the data
+    print(merged_data)
+    
+    # Saving the merged data to a new file
+    merged_data.to_csv(output_file_path, index=False)
 
-# Remove duplicate rows
-merged_data = merged_data.drop_duplicates()
+# Usage example:
+weather_data_path = 'weather_data.csv'  
+value_data_path = 'Value.csv'      
+output_file_path = 'merged_data.csv'           
 
-# Group by the 'Date' column and average the 'Value' column
-# Replacing 'Date' and 'Value' with the actual column names from your dataset
-merged_data = merged_data.groupby('Date', as_index=False).mean()
-merged_data['Temperature'] = merged_data['Temperature'].round(1)
-
-
-# Saving the merged data to a new file
-merged_data.to_csv('merged_file.csv', index=False)
-
-# Now we have all the data prepared
+merge_and_process_data(weather_data_path, value_data_path, output_file_path)
