@@ -9,70 +9,73 @@ customtkinter.set_ctk_parent_class(tkinter.Tk)
 customtkinter.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
-app = customtkinter.CTk()
-app.geometry("400x780")
-app.title("CustomTkinter simple_example.py")
+def retrieve_input():
+    input_value = entry_var.get()
+    print("The entered value is:", input_value)
+
+root = customtkinter.CTk()
+root.geometry("400x680")
 
 
-def button_callback():
-    print("Button click", combobox_1.get())
+frame = customtkinter.CTkFrame(master=root)
+frame.pack(pady=20, padx=60, fill="both", expand=True)
+
+label = customtkinter.CTkLabel(master=frame, text = "Input Values")
+label.pack(pady=10, padx=10)
+
+entry_var = tkinter.StringVar()
+
+entry_3 = customtkinter.CTkEntry(master=frame, placeholder_text="1st temperature",textvariable=entry_var)
+entry_3.pack(pady=10, padx=10)
+
+entry_4 = customtkinter.CTkEntry(master=frame, placeholder_text="2st temperature")
+entry_4.pack(pady=10, padx=10)
+
+entry_5 = customtkinter.CTkEntry(master=frame, placeholder_text="3st temperature")
+entry_5.pack(pady=10, padx=10)
+
+entry_6 = customtkinter.CTkEntry(master=frame, placeholder_text="4st temperature")
+entry_6.pack(pady=10, padx=10)
+
+entry_7 = customtkinter.CTkEntry(master=frame, placeholder_text="5st temperature")
+entry_7.pack(pady=10, padx=10)
+
+entry_8 = customtkinter.CTkEntry(master=frame, placeholder_text="6st temperature")
+entry_8.pack(pady=10, padx=10)
+
+entry_9 = customtkinter.CTkEntry(master=frame, placeholder_text="7st temperature")
+entry_9.pack(pady=10, padx=10)
+
+entry_10 = customtkinter.CTkEntry(master=frame, placeholder_text="Threshold")
+entry_10.pack(pady=10, padx=10)
 
 
-def slider_callback(value):
-    progressbar_1.set(value)
-
-
-frame_1 = customtkinter.CTkFrame(master=app)
-frame_1.pack(pady=20, padx=60, fill="both", expand=True)
-
-label_1 = customtkinter.CTkLabel(master=frame_1, justify=customtkinter.LEFT)
-label_1.pack(pady=10, padx=10)
-
-progressbar_1 = customtkinter.CTkProgressBar(master=frame_1)
-progressbar_1.pack(pady=10, padx=10)
-
-button_1 = customtkinter.CTkButton(master=frame_1, command=button_callback)
-button_1.pack(pady=10, padx=10)
-
-slider_1 = customtkinter.CTkSlider(master=frame_1, command=slider_callback, from_=0, to=1)
-slider_1.pack(pady=10, padx=10)
-slider_1.set(0.5)
-
-entry_1 = customtkinter.CTkEntry(master=frame_1, placeholder_text="CTkEntry")
-entry_1.pack(pady=10, padx=10)
-
-optionmenu_1 = customtkinter.CTkOptionMenu(frame_1, values=["Option 1", "Option 2", "Option 42 long long long..."])
+optionmenu_1 = customtkinter.CTkOptionMenu(frame, values=["Gen wind offshore", 
+            "Gen other conven.", "Gen other renew.", "Gen wind onshore", "Gen photovolt",
+            "Gen pumped storage", "Total consum.", "Consum. pumped storg."])
 optionmenu_1.pack(pady=10, padx=10)
-optionmenu_1.set("CTkOptionMenu")
+optionmenu_1.set("Sources")
 
-combobox_1 = customtkinter.CTkComboBox(frame_1, values=["Option 1", "Option 2", "Option 42 long long long..."])
+combobox_1 = customtkinter.CTkComboBox(frame, values=["Simple sq. diff", "Differenceated"])
 combobox_1.pack(pady=10, padx=10)
-combobox_1.set("CTkComboBox")
+combobox_1.set("Method")
 
-checkbox_1 = customtkinter.CTkCheckBox(master=frame_1)
-checkbox_1.pack(pady=10, padx=10)
+button = customtkinter.CTkButton(master = frame, text = "Find", command= retrieve_input)
+button.pack(pady=12,padx=10)
 
-radiobutton_var = customtkinter.IntVar(value=1)
+root.mainloop()
 
-radiobutton_1 = customtkinter.CTkRadioButton(master=frame_1, variable=radiobutton_var, value=1)
-radiobutton_1.pack(pady=10, padx=10)
 
-radiobutton_2 = customtkinter.CTkRadioButton(master=frame_1, variable=radiobutton_var, value=2)
-radiobutton_2.pack(pady=10, padx=10)
 
-switch_1 = customtkinter.CTkSwitch(master=frame_1)
-switch_1.pack(pady=10, padx=10)
 
-text_1 = customtkinter.CTkTextbox(master=frame_1, width=200, height=70)
-text_1.pack(pady=10, padx=10)
-text_1.insert("0.0", "CTkTextbox\n\n\n\n")
 
-segmented_button_1 = customtkinter.CTkSegmentedButton(master=frame_1, values=["CTkSegmentedButton", "Value 2"])
-segmented_button_1.pack(pady=10, padx=10)
+import customtkinter as ctk
 
-tabview_1 = customtkinter.CTkTabview(master=frame_1, width=300)
-tabview_1.pack(pady=10, padx=10)
-tabview_1.add("CTkTabview")
-tabview_1.add("Tab 2")
+root = ctk.CTk()
+frame = ctk.CTkFrame(root)
+frame.pack(padx=10, pady=10)
 
-app.mainloop()
+entry_3 = ctk.CTkEntry(master=frame, placeholder_text="1st temperature")
+entry_3.pack(pady=10, padx=10)
+
+root.mainloop()
