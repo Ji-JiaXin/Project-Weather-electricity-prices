@@ -9,24 +9,16 @@ import pandas as pd
 from Weather_data_preparation import *
 from Data_merge import *
 
-
 # Path to the new working directory
 new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Data"
 
 # Changing the current working directory
 os.chdir(new_directory)
 
-# Verifing the change
-print("New working directory:", os.getcwd())
-
-
 file_path = 'Weather_base.xlsx'    # Replace with your actual file path
 csv_file_path = 'Weather_new.csv'  # Same
 
-
-
 process_and_merge_weather_data(file_path, csv_file_path)
-
 
 # Usage example:
 weather_data_path = 'weather_data.csv'  
