@@ -35,7 +35,21 @@ def retrieve_input():
 
     input_value_threshold = entry_var_threshold.get()
     input_row.append(input_value_threshold)
-    #print("The entered value is:", input_row)
+    
+
+    source_energy = optionmenu_1.get()
+    method_selected = combobox_1.get()
+
+    print("Selected option from OptionMenu:", source_energy)
+    print("Selected option from ComboBox:", method_selected)
+
+    Teperature_input = ', '.join(input_row)
+    print("The entered value is:", Teperature_input)
+
+    #from Searching_first_diff import get_temperature_input
+
+
+
 
 
 root = customtkinter.CTk()
@@ -57,29 +71,29 @@ entry_var_6 = tkinter.StringVar()
 entry_var_7 = tkinter.StringVar()
 entry_var_threshold = tkinter.StringVar()
 
-entry_3 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_1)
+entry_1 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_1)
+entry_1.pack(pady=10, padx=10)
+
+entry_2 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_2)
+entry_2.pack(pady=10, padx=10)
+
+entry_3 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_3)
 entry_3.pack(pady=10, padx=10)
 
-entry_4 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_2)
+entry_4 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_4)
 entry_4.pack(pady=10, padx=10)
 
-entry_5 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_3)
+entry_5 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_5)
 entry_5.pack(pady=10, padx=10)
 
-entry_6 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_4)
+entry_6 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_6)
 entry_6.pack(pady=10, padx=10)
 
-entry_7 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_5)
+entry_7 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_7)
 entry_7.pack(pady=10, padx=10)
 
-entry_8 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_6)
-entry_8.pack(pady=10, padx=10)
-
-entry_9 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_7)
-entry_9.pack(pady=10, padx=10)
-
-entry_10 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_threshold)
-entry_10.pack(pady=10, padx=10)
+entry_threshold = customtkinter.CTkEntry(master=frame, textvariable= entry_var_threshold)
+entry_threshold.pack(pady=10, padx=10)
 
 
 optionmenu_1 = customtkinter.CTkOptionMenu(frame, values=["Gen wind offshore", 
@@ -96,5 +110,3 @@ button = customtkinter.CTkButton(master = frame, text = "Find", command= retriev
 button.pack(pady=12,padx=10)
 
 root.mainloop()
-
-print(input_row)
