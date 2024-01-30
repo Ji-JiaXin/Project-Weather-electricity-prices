@@ -58,8 +58,8 @@ root.geometry("400x680")
 frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
-label = customtkinter.CTkLabel(master=frame, text = "Input Values")
-label.pack(pady=10, padx=10)
+label = customtkinter.CTkLabel(master=frame, text = "Please insert seven temperature values in Celsius and the threshold value")
+label.pack(pady=60, padx=20)
 
 entry_var_1 = tkinter.StringVar()
 entry_var_2 = tkinter.StringVar()

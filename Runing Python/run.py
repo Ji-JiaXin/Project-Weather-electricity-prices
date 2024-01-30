@@ -1,4 +1,4 @@
-#execuce jinych - budeme volat funkce sem
+
 import os
 import pandas as pd
 import sys
@@ -7,7 +7,7 @@ import sys
 # Add the folder path to the sys.path
 sys.path.append('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Data')
 
-# Now you can import your_function from module.py
+# Now you can import functions from other modules
 from Weather_data_preparation import process_and_merge_weather_data
 from Data_merge import merge_and_process_data
 # Call the function
