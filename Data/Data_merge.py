@@ -9,8 +9,6 @@ def merge_and_process_data(weather_data_path, value_data_path, output_file_path)
     # Merge the files on the 'Date' column
     merged_data = pd.merge(data_1, data_2, on='Date', how='inner')
 
-   
-
     # Remove duplicate rows and group by the 'Date' column, averaging the values
     merged_data = merged_data.drop_duplicates()
     merged_data = merged_data.groupby('Date', as_index=False).mean()

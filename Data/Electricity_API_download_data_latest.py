@@ -201,16 +201,7 @@ class DownloadAPI(object):
             api_client=api_client,
         )
         
-    def chart_data_API_request(
-        self,
-        filter,
-        filter_copy,
-        region_copy,
-        timestamp,
-        region="DE",
-        resolution="day",
-        **kwargs
-    ):
+    def chart_data_API_request(self,filter,filter_copy,region_copy,timestamp,region="DE",resolution="day",**kwargs):
         """
         This method creates an API request. 
 
