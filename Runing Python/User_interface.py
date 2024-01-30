@@ -46,7 +46,6 @@ def retrieve_input():
     Teperature_input = ', '.join(input_row)
     print("The entered value is:", Teperature_input)
 
-    #from Searching_first_diff import get_temperature_input
 
 
 
@@ -96,9 +95,10 @@ entry_threshold = customtkinter.CTkEntry(master=frame, textvariable= entry_var_t
 entry_threshold.pack(pady=10, padx=10)
 
 
-optionmenu_1 = customtkinter.CTkOptionMenu(frame, values=["Gen wind offshore", 
-            "Gen other conven.", "Gen other renew.", "Gen wind onshore", "Gen photovolt",
-            "Gen pumped storage", "Total consum.", "Consum. pumped storg."])
+optionmenu_1 = customtkinter.CTkOptionMenu(frame, values=["Generation off shore wind", 
+            "Generation from other convential sources", "Generation from other renewables",
+            "Generation on shore wind", "Generation from photovoltaics",
+            "Generation from pumper storage", "Total electricity consumption"])
 optionmenu_1.pack(pady=10, padx=10)
 optionmenu_1.set("Sources")
 
@@ -110,3 +110,4 @@ button = customtkinter.CTkButton(master = frame, text = "Find", command= retriev
 button.pack(pady=12,padx=10)
 
 root.mainloop()
+ 

@@ -78,7 +78,7 @@ def get_temperature_input():
             print("Invalid input. Please enter 7 temperatures and 1 threshold, all separated by commas. Error:", e)
 
 # Loading the merged file
-merged_data = pd.read_csv('merged_data.csv')
+merged_data = pd.read_csv('final_data.csv')
 
 # Setting the values of the variables
 input_temperatures, threshold = get_temperature_input()

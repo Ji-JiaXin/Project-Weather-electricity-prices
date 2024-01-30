@@ -421,12 +421,18 @@ class DownloadAPI(object):
             return None
         
     dictionary_filters = {
-         'el_gen_brown_coal':1223, 'el_gen_nuclear_energy':1224, 'el_gen_off_wind':1225, 'el_gen_hydropower':1226, 'el_gen_other_conventional':1227,
-         'el_gen_other_renewables':1228, 'el_gen_biomas':4066, 'el_gen_on_wind':4067, 'el_gen_photovoltaics':4068, 'el_gen_hard_coal':4069, 'el_gen_pumped_storage':4070, 'el_gen_natural_gas':4071,
-         'el_cons_total_gid':410, 'el_cons_res_grid':4359, 'el_cons_pumped_storage':4387, 'market_price_de_lux':4169, 'market_price_neighbors_de_lux':5078, 'market_price_be':4996,
-         'market_price_no':4997, 'market_price_at':4170, 'market_price_dk_1':252, 'market_price_dk_2':253, 'market_price_it':255, 'market_price_fr':254, 'market_price_nt':256, 'market_price_pl_1':257,
-         'market_price_pl_2':258, 'market_price_ch':259, 'market_price_si':260, 'market_price_cz':261, 'market_price_hu':262,
-         'forecast_gen_off':3791, 'forecast_gen_on':123, 'forecast_gen_photovoltaic':125, 'forecast_gen_other':715, 'forecast_gen_wind_photo':5097, 'forecast_total':122,
+        'el_gen_brown_coal':1223, 'el_gen_nuclear_energy':1224, 'el_gen_off_wind':1225,
+        'el_gen_hydropower':1226, 'el_gen_other_conventional':1227,
+        'el_gen_other_renewables':1228, 'el_gen_biomas':4066, 'el_gen_on_wind':4067,
+        'el_gen_photovoltaics':4068, 'el_gen_hard_coal':4069, 'el_gen_pumped_storage':4070,
+        'el_gen_natural_gas':4071,'el_cons_total_gid':410, 'el_cons_res_grid':4359,
+        'el_cons_pumped_storage':4387, 'market_price_de_lux':4169, 'market_price_neighbors_de_lux':5078,
+        'market_price_be':4996,'market_price_no':4997, 'market_price_at':4170, 'market_price_dk_1':252,
+        'market_price_dk_2':253, 'market_price_it':255, 'market_price_fr':254, 'market_price_nt':256,
+        'market_price_pl_1':257,'market_price_pl_2':258, 'market_price_ch':259, 'market_price_si':260,
+        'market_price_cz':261, 'market_price_hu':262,'forecast_gen_off':3791, 'forecast_gen_on':123,
+        'forecast_gen_photovoltaic':125, 'forecast_gen_other':715, 'forecast_gen_wind_photo':5097,
+        'forecast_total':122,
     }
 
     def simplifier_filter(self,filter_word):
@@ -470,7 +476,13 @@ print(Elect_gen_onshore_wind)
 Elect_gen_offshore_wind = download_api.download_chart_data_by_name(filter_word='el_gen_off_wind', filter_word_copy='el_gen_off_wind', region="DE", region_copy="DE")
 print(Elect_gen_offshore_wind)
 
+# Variables of interesr:
+# 1125: Generation off shore wind
+# 1127: Generation from other convential sources
+# 1128: Generation from other renewables
+# 4067: Generation on shore wind
+# 4068: Generation from photovoltaics
+# 4070: Generation from pumper storage
+# 410: Total electricity consumption
 
-#exporting the DataFrame as csv into present working directory 
-#Elect_gen_onshore_wind.to_csv('Elect_gen_onshore_wind.csv', index=False, encoding='windows-1252')
 

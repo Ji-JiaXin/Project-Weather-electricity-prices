@@ -1,8 +1,9 @@
+# Takhle je to all right
 import pandas as pd
 
-def process_and_merge_weather_data(file_path, csv_file_path):
+def process_and_merge_weather_data(weather_base, weather_new):
     # Read the 'Average temperature' sheet from the Excel file
-    df = pd.read_excel(file_path, sheet_name='Average temperature')
+    df = pd.read_excel(weather_base, sheet_name='Average temperature')
 
     # Drop the first three rows which contain metadata and headers
     df_transformed = df.drop([0, 1, 2])
@@ -24,7 +25,7 @@ def process_and_merge_weather_data(file_path, csv_file_path):
     weather_base_done = df_melted[['Date', 'Temperature']].sort_values(by='Date')
 
     # Read the CSV file
-    Weather_new = pd.read_csv(csv_file_path)
+    Weather_new = pd.read_csv(weather_new)
     Weather_new.columns = ['Date', 'Temperature']
 
     # Convert and format the 'Date' column
@@ -55,4 +56,4 @@ def process_and_merge_weather_data(file_path, csv_file_path):
     merged_weather['Date'] = merged_weather['Date'].dt.strftime('%Y-%m-%d')
     
 
-    merged_weather.to_csv('Weather_data.csv', index = False, encoding='windows-1252')
+    merged_weather.to_csv('All_weather_data.csv', index = False, encoding='windows-1252')

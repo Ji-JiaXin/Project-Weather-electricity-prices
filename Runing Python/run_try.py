@@ -1,13 +1,6 @@
-# Run try
-
 # Example input: 5, 6, 7, 8, 2, 4, 2, 7
-
-# Weather prep
-
 import os
 import pandas as pd
-from Weather_data_preparation import *
-from Data_merge import *
 
 # Path to the new working directory
 new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Data"

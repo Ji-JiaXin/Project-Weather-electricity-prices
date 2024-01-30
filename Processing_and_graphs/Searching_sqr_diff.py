@@ -70,7 +70,7 @@ def get_temperature_input():
 
 
 # Load the merged file
-file_path = 'merged_file.csv'
+file_path = 'final_data.csv'
 merged_data = pd.read_csv(file_path)
 
 
