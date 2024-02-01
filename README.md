@@ -39,7 +39,7 @@ The data about electricity generation from different sources (offshore wind, ons
 
 The weather data is composed from various online sources, as we were not able to find one reliable free provider, which would satisfy our data requirements. Therefore, we merged data from different sources ("Weather_base.xlsx" and "Weather_new.csv") into one final file ("All_weather_data.csv). 
 
-For our analysis we merged the data about electricity (from API) with the final weather data into one dataframe ("final_data.csv"). Everything about the data preparation can be found in one file ("data_preparation.csv").
+For our analysis we merged the data about electricity (from API) with the final weather data into one dataframe ("final_data.csv"). Everything about the data preparation can be found in one file ("Data_preparation.csv").
 
 ## Models for finding similar weather patterns
 
