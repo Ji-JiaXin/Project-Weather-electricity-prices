@@ -13,15 +13,6 @@ from deutschland.smard.api_client import ApiClient
 from deutschland.smard.api_client import Endpoint as _Endpoint
 from deutschland.smard.model.indices import Indices
 from deutschland.smard.model.time_series import TimeSeries
-from deutschland.smard.model_utils import (
-    check_allowed_values,
-    check_validations,
-    date,
-    datetime,
-    file_type,
-    none_type,
-    validate_and_convert_types,
-)
 
 class DownloadAPI(object):
     """
@@ -33,7 +24,6 @@ class DownloadAPI(object):
     It downloads the data based on inputed parameters for specific filter, region, resultion and timestamp, converts it into nice clean Pandas DataFrame.
     The first part of the code was inspired by github repository https://github.com/bundesAPI/smard-api/tree/main. Changes were made to make the code work for our project. 
     ....
-
     Attributes
     ----------
     api_client 
@@ -42,9 +32,7 @@ class DownloadAPI(object):
     chart_data_chart_data_API_request_endpoint
         Used to make requests to API endpoint in order to get specific time series data. 
         It is a part of "_Endpoint" class from deutschland.smard library.       
-
     ....
-
     Methods
     ----------
     def __init__()
@@ -75,17 +63,17 @@ class DownloadAPI(object):
         Parameters:
             Same as for the method chart_data_API_request(). 
 
-    def simplifier_filter(self,filter_word):
+    def simplifier_filter():
         Getting the filter number based on insert name.
         Parameters: 
             filter_word(str)
         
-    def simplifier_filter_copy(self,filter_word_copy):
+    def simplifier_filter_copy():
         Getting the filter_copy number based on inserted filter name.
         Parameters: 
             filter_word_copy(str)
 
-    def download_chart_data_by_name(self,filter_word, filter_word_copy,region, region_copy, timestamp=None, resolution="day" , **kwargs)
+    def download_chart_data_by_name()
         Calls both simplifiers and connects it with download_chart_data function, making the whole process more user friendly. 
         One must be careful while typing the name of the filter, it must match with keys in the dictionary_filters. 
         Parameters: 
@@ -98,6 +86,9 @@ class DownloadAPI(object):
             **kwargs    
     """
     def __init__(self, api_client=None):
+        """
+        Initiator. It defines the endpoint. 
+        """
         #when api_client is not defined, it creates APIClient 
         if api_client is None:
             api_client = ApiClient()
@@ -114,13 +105,10 @@ class DownloadAPI(object):
                 "servers": None,
             },
             params_map={
-                "all": ["filter","filter_copy","region","region_copy","resolution","timestamp",
-                ],
-                "required": ["filter","filter_copy","region","region_copy","resolution","timestamp",
-                ],
+                "all": ["filter","filter_copy","region","region_copy","resolution","timestamp",],
+                "required": ["filter","filter_copy","region","region_copy","resolution","timestamp",],
                 "nullable": [],
-                "enum": ["filter","filter_copy","region","region_copy","resolution",
-                ],
+                "enum": ["filter","filter_copy","region","region_copy","resolution",],
                 "validation": [],
             },
             root_map={
@@ -141,12 +129,9 @@ class DownloadAPI(object):
                     ("resolution",): {"HOUR": "hour","QUARTERHOUR": "quarterhour","DAY": "day","WEEK": "week","MONTH": "month","YEAR": "year",
                     },
                 },
-                "openapi_types": {"filter": (int,),"filter_copy": (int,),"region": (str,),"region_copy": (str,),"resolution": (str,),"timestamp": (int,),
-                },
-                "attribute_map": {"filter": "filter","filter_copy": "filterCopy","region": "region","region_copy": "regionCopy","resolution": "resolution","timestamp": "timestamp",
-                },
-                "location_map": {"filter": "path","filter_copy": "path","region": "path","region_copy": "path","resolution": "path","timestamp": "path",
-                },
+                "openapi_types": {"filter": (int,),"filter_copy": (int,),"region": (str,),"region_copy": (str,),"resolution": (str,),"timestamp": (int,),},
+                "attribute_map": {"filter": "filter","filter_copy": "filterCopy","region": "region","region_copy": "regionCopy","resolution": "resolution","timestamp": "timestamp",},
+                "location_map": {"filter": "path","filter_copy": "path","region": "path","region_copy": "path","resolution": "path","timestamp": "path",},
                 "collection_format_map": {},
             },
             headers_map={
@@ -165,13 +150,10 @@ class DownloadAPI(object):
                 "servers": None,
             },
             params_map={
-                "all": ["filter","region","resolution",
-                ],
-                "required": ["filter","region","resolution",
-                ],
+                "all": ["filter","region","resolution",],
+                "required": ["filter","region","resolution",],
                 "nullable": [],
-                "enum": ["filter","region","resolution",
-                ],
+                "enum": ["filter","region","resolution",],
                 "validation": [],
             },
             root_map={
@@ -186,12 +168,9 @@ class DownloadAPI(object):
                     ("resolution",): {"HOUR": "hour","QUARTERHOUR": "quarterhour","DAY": "day","WEEK": "week","MONTH": "month","YEAR": "year",
                     },
                 },
-                "openapi_types": {"filter": (int,),"region": (str,),"resolution": (str,),
-                },
-                "attribute_map": {"filter": "filter","region": "region","resolution": "resolution",
-                },
-                "location_map": {"filter": "path","region": "path","resolution": "path",
-                },
+                "openapi_types": {"filter": (int,),"region": (str,),"resolution": (str,),},
+                "attribute_map": {"filter": "filter","region": "region","resolution": "resolution",},
+                "location_map": {"filter": "path","region": "path","resolution": "path",},
                 "collection_format_map": {},
             },
             headers_map={
@@ -281,12 +260,9 @@ class DownloadAPI(object):
         return self.chart_data_API_request_endpoint.call_with_http_info(
             **kwargs)
        
-    def chart_data_timestamps(
-    self, filter, region, resolution, **kwargs
-    ):
+    def chart_data_timestamps(self, filter, region, resolution, **kwargs):
         """
         Returns available timestamps based on the combination of filter, region and resolution. 
-
         Args:
             filter(int)
                 `1223` - Electricity generation: Brown coal (Lignite),`1224` - Electricity generation: Nuclear energy,`1225` - Electricity generation: Offshore wind, `1226` - Electricity generation: Hydropower,
@@ -455,19 +431,18 @@ class DownloadAPI(object):
     
     
 
-
 config = Configuration(host="https://www.smard.de/app", discard_unknown_keys=True)
 api_client = ApiClient(config)
 download_api = DownloadAPI(api_client)
 
 #downloading example data 
-Elect_gen_onshore_wind = download_api.download_chart_data(filter=4067, filter_copy=4067,region="DE", region_copy="DE")
-print(Elect_gen_onshore_wind)
+#Elect_gen_onshore_wind = download_api.download_chart_data(filter=4067, filter_copy=4067,region="DE", region_copy="DE")
+#print(Elect_gen_onshore_wind)
 
-Elect_gen_offshore_wind = download_api.download_chart_data_by_name(filter_word='el_gen_off_wind', filter_word_copy='el_gen_off_wind', region="DE", region_copy="DE")
-print(Elect_gen_offshore_wind)
+#Elect_gen_offshore_wind = download_api.download_chart_data_by_name(filter_word='el_gen_off_wind', filter_word_copy='el_gen_off_wind', region="DE", region_copy="DE")
+#print(Elect_gen_offshore_wind)
 
-# Variables of interesr:
+# Variables of interest:
 # 1125: Generation off shore wind
 # 1127: Generation from other convential sources
 # 1128: Generation from other renewables

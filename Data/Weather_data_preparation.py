@@ -2,6 +2,13 @@
 import pandas as pd
 
 def process_and_merge_weather_data(weather_base, weather_new):
+    """
+    Firstly, reading base excel file "Weather_base.xlsx" with weather data, renaming, dropping NAs, converting date into datetime object. 
+    Secondly, reading "weather_new.csv" file, converting date column into proper datetime object, dropping out null values and final aggregation. 
+    Finally, merging these two files into one Pandas DataFrame and saving as CSV file. 
+    Returns:
+    CSV file with three columns - date, temperature, value. 
+    """
     # Read the 'Average temperature' sheet from the Excel file
     df = pd.read_excel(weather_base, sheet_name='Average temperature')
 

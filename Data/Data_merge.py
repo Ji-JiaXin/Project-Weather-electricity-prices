@@ -2,6 +2,11 @@ import pandas as pd
 
 
 def merge_and_process_data(weather_data_path, value_data_path, output_file_path):
+    """
+    Merging two files "All_weather_data.csv" with "value.csv", removing duplicates, renaming columns and saving into csv format.
+    Returns:
+    CSV file with three columns - date, temperature, value. 
+    """
     # Loading the files
     data_1 = pd.read_csv(weather_data_path)
     data_2 = pd.read_csv(value_data_path)

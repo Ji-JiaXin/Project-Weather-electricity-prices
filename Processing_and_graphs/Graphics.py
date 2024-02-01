@@ -14,19 +14,32 @@ os.chdir(new_directory)
 # Graph
 class Visualisator(object):
     """
-    BLAAAA
+    The class includes functions for visualisation of the relationship between the values and temperature taken from the "final_data.csv". 
     ....
-
     Attributes
     ----------
-    
+    None
     ....
 
     Methods
     ----------
-   
+    graph_creator_one_period():
+        Creating a graph covering the whole time period of the data.
+        Parameters:
+            output_dates - the dates from searching_first_diff.py or searching_sqr_diff.py
+    
+    graph_creator_year(output_dates):
+        Creating a series of subplots in a grid, each represents a certain year.
+        Parameters:
+            output_dates - the dates from searching_first_diff.py or searching_sqr_diff.py
     """
     def graph_creator_one_period(output_dates):
+        """
+        Loading of the final_data.csv, plotting of two variables over time (temperature, values). 
+        Highlighting the dates with similar weather patterns (the output from searching_first_diff.py or searching_sqr_diff.py).
+        Returns:
+        A plot displaying the relationship between temperature and the downloaded data from API with highlighted days.  
+        """
         # Loading the merged file
         file_path = 'final_data.csv'
         df = pd.read_csv(file_path)
@@ -61,6 +74,12 @@ class Visualisator(object):
         plt.show()
 
     def graph_creator_year(output_dates):
+        """
+        Loading of the final_data.csv, creating subplots into a grid 3x4 with a use of for loop. 
+        Highlighting the dates with similar weather patterns (the output from searching_first_diff.py or searching_sqr_diff.py).
+        Returns:
+        Subplots displaying the relationship between temperature and the downloaded data from API with highlighted days.  
+        """
         # Loading the merged file
         file_path = 'final_data.csv'
         df = pd.read_csv(file_path)
@@ -113,5 +132,5 @@ class Visualisator(object):
 output_dates = {'2015-02-11', '2015-02-12','2015-02-13','2015-02-14','2015-02-15','2015-02-16','2015-02-17','2015-02-18','2015-02-19',
                     '2016-02-11', '2016-02-12','2016-02-13','2016-02-14','2016-02-15','2016-02-16','2016-02-17','2016-02-18','2023-02-19'}
 
-#Visualisator.graph_creator_year(output_dates)
-Visualisator.graph_creator_one_period(output_dates)
+Visualisator.graph_creator_year(output_dates)
+#Visualisator.graph_creator_one_period(output_dates)
