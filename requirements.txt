@@ -1,0 +1,5 @@
+deutschland
+pandas
+numpy
+customtkinter
+

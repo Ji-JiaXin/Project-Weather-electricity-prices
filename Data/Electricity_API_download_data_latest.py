@@ -1,5 +1,5 @@
 # start by downloading the package
-# pip install deutschland[smard]
+# pip install deutschland
 # poetry add deutschland -E smard
 
 #import package
