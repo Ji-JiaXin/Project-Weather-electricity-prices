@@ -186,21 +186,45 @@ class DownloadAPI(object):
 
         Parameters:
             filter(int)
-                 `1223` - Electricity generation: Brown coal (Lignite),`1224` - Electricity generation: Nuclear energy,`1225` - Electricity generation: Offshore wind, `1226` - Electricity generation: Hydropower,
-                 `1227` - Electricity generation: Other Conventional, `1228` - Electricity generation: Other renewables, `4066` - Electricity generation: Biomass, `4067` - Electricity generation: Onshore wind, 
-                 `4068` - Electricity generation: Photovoltaics, `4069` - Electricity generation: Hard coal, `4070` - Electricity generation: Pumped storage, `4071` - Electricity generation: Natural gas, 
-                 `410` - Electricity consumption: Total (grid load), `4359` - Electricity consumption: Residual load, `4387` - Electricity consumption: Pumped storage, 
-                 `4169` - Market price: Germany/Luxembourg, `5078` - Market price: neighbors DE/LU, `4996` - Market price: Belgium, `4997` - Market price: Norway 2, 
-                 `4170` - Market price: Austria, `252` - Market price: Denmark 1, `253` - Market price: Denmark 2, `254` - Market price: France, `255` - Market price: Italy (North), 
-                 `256` - Market price: Netherlands, `257` - Market price: Poland, `258` - Market price: Poland,`259` - Market price: Switzerland, `260` - Market price: Slovenia, 
-                 `261` - Market price: Czech Republic, `262` - Market price: Hungary, `3791` - Forecasted generation: Offshore, `123` - Forecast generation: Onshore, 
-                 `125` - Forecast generation: Photovoltaic, `715` - Forecast generation: Other, `5097` - Forecast generation: Wind and photovoltaic, `122` - Forecast generation: Total
+                 `1223` - Electricity generation: Brown coal (Lignite)
+                 `1224` - Electricity generation: Nuclear energy
+                 `1225` - Electricity generation: Offshore wind
+                 `1226` - Electricity generation: Hydropower
+                 `1227` - Electricity generation: Other Conventional
+                 `1228` - Electricity generation: Other renewables
+                 `4066` - Electricity generation: Biomass
+                 `4067` - Electricity generation: Onshore wind, 
+                 `4068` - Electricity generation: Photovoltaics
+                 `4069` - Electricity generation: Hard coal
+                 `4070` - Electricity generation: Pumped storage
+                 `4071` - Electricity generation: Natural gas, 
+                 `410` - Electricity consumption: Total (grid load)
+                 `4359` - Electricity consumption: Residual load
+                 `4387` - Electricity consumption: Pumped storage, 
+                 `4169` - Market price: Germany/Luxembourg
+                 `5078` - Market price: neighbors DE/LU
+                 `4996` - Market price: Belgium
+                 `4997` - Market price: Norway 2, 
+                 `4170` - Market price: Austria
+                 `252` - Market price: Denmark 1
+                 `253` - Market price: Denmark 2
+                 `254` - Market price: France
+                 `255` - Market price: Italy (North), 
+                 `256` - Market price: Netherlands
+                 `257` - Market price: Poland
+                 `258` - Market price: Poland
+                 `259` - Market price: Switzerland
+                 `260` - Market price: Slovenia, 
+                 `261` - Market price: Czech Republic
+                 `262` - Market price: Hungary
+                 `3791` - Forecasted generation: Offshore
+                 `123` - Forecast generation: Onshore 
+                 `125` - Forecast generation: Photovoltaic
+                 `715` - Forecast generation: Other
+                 `5097` - Forecast generation: Wind and photovoltaic
+                 `122` - Forecast generation: Total
             filter_copy(int) - same as filter(), it must be filled due to wrong API design from creators
             region(str) - defaultly set as "DE"
-                Country / control area / market area:   
-                `DE` - Country: Germany, `AT` - Country: Austria, `LU` - Country: Luxembourg, `DE-LU` - Market area: DE/LU (from 01.10.2018),
-                `DE-AT-LU` - Market area: DE/AT/LU (until 30.09.2018), 50Hertz - control area (DE): 50Hertz, `Amprion` - control area (DE): Amprion, 
-                `TenneT` - control area (DE): TenneT, TransnetBW` - Control area (DE): TransnetBW, `APG` - Control area (AT): APG, `Creos` - Control area (LU): Creos
             region_copy(str) - same as region(), it must be filled due to wrong API design from creators
             timestamp(integer)
             resolution(str) - resolution of the data, defaultly as "hour"   
@@ -263,51 +287,7 @@ class DownloadAPI(object):
     def chart_data_timestamps(self, filter, region, resolution, **kwargs):
         """
         Returns available timestamps based on the combination of filter, region and resolution. 
-        Args:
-            filter(int)
-                `1223` - Electricity generation: Brown coal (Lignite),`1224` - Electricity generation: Nuclear energy,`1225` - Electricity generation: Offshore wind, `1226` - Electricity generation: Hydropower,
-                `1227` - Electricity generation: Other Conventional, `1228` - Electricity generation: Other renewables, `4066` - Electricity generation: Biomass, `4067` - Electricity generation: Onshore wind, 
-                `4068` - Electricity generation: Photovoltaics, `4069` - Electricity generation: Hard coal, `4070` - Electricity generation: Pumped storage, `4071` - Electricity generation: Natural gas, 
-                `410` - Electricity consumption: Total (grid load), `4359` - Electricity consumption: Residual load, `4387` - Electricity consumption: Pumped storage, 
-                `4169` - Market price: Germany/Luxembourg, `5078` - Market price: neighbors DE/LU, `4996` - Market price: Belgium, `4997` - Market price: Norway 2, 
-                `4170` - Market price: Austria, `252` - Market price: Denmark 1, `253` - Market price: Denmark 2, `254` - Market price: France, `255` - Market price: Italy (North), 
-                `256` - Market price: Netherlands, `257` - Market price: Poland, `258` - Market price: Poland,`259` - Market price: Switzerland, `260` - Market price: Slovenia, 
-                `261` - Market price: Czech Republic, `262` - Market price: Hungary, `3791` - Forecasted generation: Offshore, `123` - Forecast generation: Onshore, 
-                `125` - Forecast generation: Photovoltaic, `715` - Forecast generation: Other, `5097` - Forecast generation: Wind and photovoltaic, `122` - Forecast generation: Total
-            region(str) - defaultly set as "DE"
-                Country / control area / market area:
-                `DE` - Country: Germany, `AT` - Country: Austria, `LU` - Country: Luxembourg, `DE-LU` - Market area: DE/LU (from 01.10.2018),
-                `DE-AT-LU` - Market area: DE/AT/LU (until 30.09.2018), 50Hertz - control area (DE): 50Hertz, `Amprion` - control area (DE): Amprion, 
-                `TenneT` - control area (DE): TenneT, TransnetBW` - Control area (DE): TransnetBW, `APG` - Control area (AT): APG, `Creos` - Control area (LU): Creos
-            resolution(str) - resolution of the data, defaultly as "hour"   
-                `hour` - Hourly, `quarterhour` - Quarterhourly, `day` - Daily, `weekly` - Weekly, `monthly` - Monthly, `yearly` - Yearly
-        Keyword Args:
-            _return_http_data_only (bool): response data without head status
-                code and headers. Default is True.
-            _preload_content (bool): if False, the urllib3.HTTPResponse object
-                will be returned without reading/decoding response data.
-                Default is True.
-            _request_timeout (int/float/tuple): timeout setting for this request. If
-                one number provided, it will be total request timeout. It can also
-                be a pair (tuple) of (connection, read) timeouts.
-                Default is None.
-            _check_input_type (bool): specifies if type checking
-                should be done one the data sent to the server.
-                Default is True.
-            _check_return_type (bool): specifies if type checking
-                should be done one the data received from the server.
-                Default is True.
-            _spec_property_naming (bool): True if the variable names in the input data
-                are serialized names, as specified in the OpenAPI document.
-                False if the variable names in the input data
-                are pythonic names, e.g. snake case (default)
-            _content_type (str/None): force body content-type.
-                Default is None and content-type will be predicted by allowed
-                content-types and body.
-            _host_index (int/None): specifies the index of the server
-                that we want to use.
-                Default is read from the configuration.
-            async_req (bool): execute request asynchronously
+        Parametrs same as in 'chart_data_API_request()'
 
         Returns:
             Indices
@@ -388,10 +368,10 @@ class DownloadAPI(object):
             return None
         
     dictionary_filters = {
-        'el_gen_brown_coal':1223, 'el_gen_nuclear_energy':1224, 'el_gen_off_wind':1225,
-        'el_gen_hydropower':1226, 'el_gen_other_conventional':1227,
-        'el_gen_other_renewables':1228, 'el_gen_biomas':4066, 'el_gen_on_wind':4067,
-        'el_gen_photovoltaics':4068, 'el_gen_hard_coal':4069, 'el_gen_pumped_storage':4070,
+        'el_gen_brown_coal':1223, 'el_gen_nuclear_energy':1224, 'Generation off shore wind':1225,
+        'el_gen_hydropower':1226, 'Generation from other convential sources':1227,
+        'Generation from other renewables':1228, 'el_gen_biomas':4066, 'Generation on shore wind':4067,
+        'Generation from photovoltaics':4068, 'el_gen_hard_coal':4069, 'Generation from pumper storage':4070,
         'el_gen_natural_gas':4071,'el_cons_total_gid':410, 'el_cons_res_grid':4359,
         'el_cons_pumped_storage':4387, 'market_price_de_lux':4169, 'market_price_neighbors_de_lux':5078,
         'market_price_be':4996,'market_price_no':4997, 'market_price_at':4170, 'market_price_dk_1':252,
@@ -399,7 +379,7 @@ class DownloadAPI(object):
         'market_price_pl_1':257,'market_price_pl_2':258, 'market_price_ch':259, 'market_price_si':260,
         'market_price_cz':261, 'market_price_hu':262,'forecast_gen_off':3791, 'forecast_gen_on':123,
         'forecast_gen_photovoltaic':125, 'forecast_gen_other':715, 'forecast_gen_wind_photo':5097,
-        'forecast_total':122,
+        'forecast_total':122, 'Total electricity consumption' : 410
     }
 
     def simplifier_filter(self,filter_word):
@@ -436,10 +416,10 @@ api_client = ApiClient(config)
 download_api = DownloadAPI(api_client)
 
 #downloading example data 
-#Elect_gen_onshore_wind = download_api.download_chart_data(filter=4067, filter_copy=4067,region="DE", region_copy="DE")
-#print(Elect_gen_onshore_wind)
+Elect_gen_onshore_wind = download_api.download_chart_data(filter=4067, filter_copy=4067,region="DE", region_copy="DE")
+print(Elect_gen_onshore_wind)
 
-#Elect_gen_offshore_wind = download_api.download_chart_data_by_name(filter_word='el_gen_off_wind', filter_word_copy='el_gen_off_wind', region="DE", region_copy="DE")
+#Elect_gen_offshore_wind = download_api.download_chart_data_by_name(filter_word=1225, filter_word_copy=1225, region="DE", region_copy="DE")
 #print(Elect_gen_offshore_wind)
 
 # Variables of interest:
