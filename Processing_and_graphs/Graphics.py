@@ -23,20 +23,21 @@ class Visualisator(object):
 
     Methods
     ----------
-    graph_creator_one_period():
-        Creating a graph covering the whole time period of the data.
-        Parameters:
-            output_dates - the dates from searching_first_diff.py or searching_sqr_diff.py
+    graph_creator_one_period(output_dates):
+        Creating a graph covering the whole time period of the data. Uses the "final_data.csv", creates a plot describing the envolvement of temperature and values over time.
+        It also highlights dates with similar weather pattern. 
     
     graph_creator_year(output_dates):
-        Creating a series of subplots in a grid, each represents a certain year.
-        Parameters:
-            output_dates - the dates from searching_first_diff.py or searching_sqr_diff.py
+        Creating a series of subplots in a 3x4 grid, each representing a certain year. Similarly to previous method, it plots the temperature and values over time and highlights dates with similar patterns. 
     """
     def graph_creator_one_period(output_dates):
         """
         Loading of the final_data.csv, plotting of two variables over time (temperature, values). 
         Highlighting the dates with similar weather patterns (the output from searching_first_diff.py or searching_sqr_diff.py).
+        
+        Parameters:
+            output_dates - A set of dates from searching_first_diff.py or searching_sqr_diff.py
+        
         Returns:
         A plot displaying the relationship between temperature and the downloaded data from API with highlighted days.  
         """
@@ -77,6 +78,10 @@ class Visualisator(object):
         """
         Loading of the final_data.csv, creating subplots into a grid 3x4 with a use of for loop. 
         Highlighting the dates with similar weather patterns (the output from searching_first_diff.py or searching_sqr_diff.py).
+    
+        Parameters:
+            output_dates - A set of dates from searching_first_diff.py or searching_sqr_diff.py
+        
         Returns:
         Subplots displaying the relationship between temperature and the downloaded data from API with highlighted days.  
         """
