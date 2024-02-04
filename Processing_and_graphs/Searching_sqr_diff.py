@@ -5,16 +5,16 @@ import pandas as pd
 import numpy as np
 import os
 # Path to the new working directory
-new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
+#new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
 
 # Change the current working directory
-os.chdir(new_directory)
+#os.chdir(new_directory)
 
 # Verify the change
-print("New working directory:", os.getcwd())
+#print("New working directory:", os.getcwd())
 
 
-def find_similar_temperature_periods(input_temperatures, data, threshold):
+def searching_difference(input_temperatures, data, threshold):
     """
     Function takes the data from input, search whole dataset
       and find time periods with similar temperatures.
@@ -78,7 +78,7 @@ merged_data = pd.read_csv(file_path)
 input_temperatures, threshold = get_temperature_input()
 
 # Find similar temperature periods
-similar_periods = find_similar_temperature_periods(input_temperatures, merged_data, threshold)
+similar_periods = searching_difference(input_temperatures, merged_data, threshold)
 
 if similar_periods == []:
     print("We have found NO similar periods.You are to strict. Try to set higer threshold (8th number in the input).")

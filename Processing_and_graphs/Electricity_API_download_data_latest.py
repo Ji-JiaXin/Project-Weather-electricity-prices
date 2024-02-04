@@ -368,10 +368,10 @@ class DownloadAPI(object):
             return None
         
     dictionary_filters = {
-        'el_gen_brown_coal':1223, 'el_gen_nuclear_energy':1224, 'Generation off shore wind':1225,
-        'el_gen_hydropower':1226, 'Generation from other convential sources':1227,
-        'Generation from other renewables':1228, 'el_gen_biomas':4066, 'Generation on shore wind':4067,
-        'Generation from photovoltaics':4068, 'el_gen_hard_coal':4069, 'Generation from pumper storage':4070,
+        'el_gen_brown_coal':1223, 'el_gen_nuclear_energy':1224, 'generation off shore wind':1225,
+        'el_gen_hydropower':1226, 'generation from other convential sources':1227,
+        'generation from other renewables':1228, 'el_gen_biomas':4066, 'generation on shore wind':4067,
+        'generation from photovoltaics':4068, 'el_gen_hard_coal':4069, 'generation from pumper storage':4070,
         'el_gen_natural_gas':4071,'el_cons_total_gid':410, 'el_cons_res_grid':4359,
         'el_cons_pumped_storage':4387, 'market_price_de_lux':4169, 'market_price_neighbors_de_lux':5078,
         'market_price_be':4996,'market_price_no':4997, 'market_price_at':4170, 'market_price_dk_1':252,
@@ -379,7 +379,7 @@ class DownloadAPI(object):
         'market_price_pl_1':257,'market_price_pl_2':258, 'market_price_ch':259, 'market_price_si':260,
         'market_price_cz':261, 'market_price_hu':262,'forecast_gen_off':3791, 'forecast_gen_on':123,
         'forecast_gen_photovoltaic':125, 'forecast_gen_other':715, 'forecast_gen_wind_photo':5097,
-        'forecast_total':122, 'Total electricity consumption' : 410
+        'forecast_total':122, 'total electricity consumption' : 410
     }
 
     def simplifier_filter(self,filter_word):
@@ -408,7 +408,7 @@ class DownloadAPI(object):
             print(f"Typo in filter name -> unknown filter: {filter_word}")
             return None
         return self.download_chart_data(filter_num, filter_num_copy,region, region_copy, timestamp=None, resolution="day" , **kwargs)
-    
+
     
 
 config = Configuration(host="https://www.smard.de/app", discard_unknown_keys=True)
@@ -416,10 +416,10 @@ api_client = ApiClient(config)
 download_api = DownloadAPI(api_client)
 
 #downloading example data 
-Elect_gen_onshore_wind = download_api.download_chart_data(filter=4067, filter_copy=4067,region="DE", region_copy="DE")
-print(Elect_gen_onshore_wind)
+#Elect_gen_onshore_wind = download_api.download_chart_data(filter=4067, filter_copy=4067,region="DE", region_copy="DE")
+#print(Elect_gen_onshore_wind)
 
-#Elect_gen_offshore_wind = download_api.download_chart_data_by_name(filter_word=1225, filter_word_copy=1225, region="DE", region_copy="DE")
+#Elect_gen_offshore_wind = download_api.download_chart_data_by_name(filter_word="Generation from photovoltaics", filter_word_copy="Generation from photovoltaics", region="DE", region_copy="DE")
 #print(Elect_gen_offshore_wind)
 
 # Variables of interest:

@@ -59,7 +59,7 @@ frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
 label = customtkinter.CTkLabel(master=frame, text = "Please insert seven temperature values in Celsius and the threshold value")
-label.pack(pady=60, padx=20)
+label.pack(pady=20, padx=20)
 
 entry_var_1 = tkinter.StringVar()
 entry_var_2 = tkinter.StringVar()

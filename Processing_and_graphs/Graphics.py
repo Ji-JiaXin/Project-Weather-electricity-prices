@@ -2,12 +2,16 @@
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+import datetime
 
 # Path to the new working directory
-#new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Data"
-new_directory = "C:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Data"
+#new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
+new_directory = "C:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs"
 
-# Changing the current working directory
+# Path to the new working directory
+#new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
+
+# Change the current working directory
 os.chdir(new_directory)
 
 
@@ -63,8 +67,9 @@ class Visualisator(object):
         axes_values.tick_params(axis='y', labelcolor=color_outline)
 
         #highlight the output days from the function searching for similar weather patterns by - adding dotted lines
-        for day in output_dates:
-            axes_temperature.axvline(pd.to_datetime(day), color='red', linestyle=':', linewidth=2, zorder=2)
+        for period in output_dates:
+            for day in period['Date']:
+                axes_temperature.axvline(pd.to_datetime(day), color='red', linestyle=':', linewidth=2, zorder=2)
 
         # Adding a legend and title 
         fig.tight_layout()
@@ -119,11 +124,18 @@ class Visualisator(object):
             axes_years[n].tick_params(axis='y', labelsize=5)
             axes_temp.tick_params(axis='y', labelsize=5)
 
-            # highlight specific dates 
             #iterating trough the dataset searching if the date is there and then putting a dotted line in the graph
-            for day in output_dates:
-                if day in df_year['Date'].astype(str).values:
-                    axes_years[n].axvline(pd.to_datetime(day), color='red', linestyle=':', linewidth=1)
+            output_dates_str = output_dates.copy()  # Create a copy as we do not want to modify our original data
+            for similar_period_df in output_dates_str: 
+                #we need to reshape the Date column into string, using lambda function (only if the Date is datetime.datetime otherwise do nothing)
+                #also we need to use .loc to avoid setting with copy warning
+                similar_period_df.loc[:,'Date'] = similar_period_df['Date'].apply(lambda x: x.strftime('%Y-%m-%d') if isinstance(x, datetime.datetime) else x)
+
+                # Highlight specific dates by iterating through the dataset and checking if the date is in df_year
+            for similar_period_df in output_dates_str:
+                for day in similar_period_df['Date']:
+                    if day in df_year['Date'].astype(str).values:
+                        axes_years[n].axvline(pd.to_datetime(day), color='red', linestyle=':', linewidth=1)
 
         # Final touches - adjusting layout and title 
         fig.tight_layout()
@@ -132,10 +144,8 @@ class Visualisator(object):
         plt.show()
 
 
-#the days we got from our code for searching of similar weather patterns  
-#example
-output_dates = {'2015-02-11', '2015-02-12','2015-02-13','2015-02-14','2015-02-15','2015-02-16','2015-02-17','2015-02-18','2015-02-19',
-                    '2016-02-11', '2016-02-12','2016-02-13','2016-02-14','2016-02-15','2016-02-16','2016-02-17','2016-02-18','2023-02-19'}
+# Call the function to get similar dates
+#output_dates = searching_difference(input_temperatures, merged_data, threshold)
 
-Visualisator.graph_creator_year(output_dates)
+#Visualisator.graph_creator_year(output_dates)
 #Visualisator.graph_creator_one_period(output_dates)
