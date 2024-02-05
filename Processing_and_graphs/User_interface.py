@@ -14,16 +14,16 @@ customtkinter.set_ctk_parent_class(tkinter.Tk)
 
 customtkinter.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
+
+# Choose your path
 final_data = pd.read_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/final_data.csv')
 input_row = []
 
-import pandas as pd  # Ensure pandas is imported at the top of your file
+import pandas as pd 
 
 def retrieve_input():
-    # Clear previous inputs to handle consecutive uses without restarting the app
     input_row.clear()
 
-    # Collect input values from entry widgets and convert them to floats
     try:
         input_temperatures = [
             float(entry_var_1.get()),
@@ -36,21 +36,19 @@ def retrieve_input():
         ]
     except ValueError:
         print("Please enter valid numeric values for temperatures.")
-        return  # Exits the function if conversion fails
+        return  
 
     try:
         threshold = float(entry_var_threshold.get())
     except ValueError:
         print("Please enter a valid numeric value for the threshold.")
-        return  # Exits the function if conversion fails
+        return 
 
-    # Call the function with the DataFrame
     similar_periods = searching_difference(input_temperatures, final_data, threshold)
     for index, period in enumerate(similar_periods):
             print(f"Similar period {index + 1}:\n", period, "\n")
     
     print('We have found', len(similar_periods), 'similar periods')
-    # Your existing logic for handling the output from searching_difference follows...
 
 
 
