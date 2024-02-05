@@ -8,42 +8,7 @@ new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Proce
 os.chdir(new_directory)
 
 class Data_prep(object):
-    """
-    This class covers methods for preparing and merging weather and energy consumption/production data. 
-    ....
-    Methods
-    ----------
-    def process_and_merge_weather_data()
-        Processes weather data from two different sources.
-
-    def merge_and_process_data()
-        Merging of weather data and value data from two different sources, clearing data and dropping duplicates. 
-    """
-    def process_and_merge_weather_data(weather_base, weather_new):
-        """
-        Reads, processes, and merges weather data from two different sources.
-
-        Parameters:
-        - weather_base (str): File path to the base weather data file.
-        - weather_new (str): File path to the new weather data file.
-
-        Returns:
-        None. Saves the merged weather data to a CSV file.
-        """
-
-    def merge_and_process_data(weather_data_path, value_data_path, output_file_path):
-        """
-        Merges weather data with other data, removes duplicates, and calculates averages.
-
-        Parameters:
-        - weather_data_path (str): File path to the weather data file.
-        - value_data_path (str): File path to the value data file.
-        - output_file_path (str): File path to save the merged data.
-
-        Returns:
-        None. Saves the merged data to a CSV file.
-        """
-
+    
     def process_and_merge_weather_data(self, weather_base, weather_new):
         """
         Firstly, reading base excel file "Weather_base.xlsx" with weather data, renaming, dropping NAs, converting date into datetime object. 

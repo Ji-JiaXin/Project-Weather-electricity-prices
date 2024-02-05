@@ -3,51 +3,54 @@
 # pip install customtkinter
 import customtkinter
 import tkinter
+import pandas as pd
+
+import sys
+# Add the folder path to the sys.path
+sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs")
+from Searching_first_diff import searching_difference
 
 customtkinter.set_ctk_parent_class(tkinter.Tk)
 
 customtkinter.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
-
+final_data = pd.read_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/final_data.csv')
 input_row = []
 
+import pandas as pd  # Ensure pandas is imported at the top of your file
+
 def retrieve_input():
-    input_value_1 = entry_var_1.get()
-    input_row.append(input_value_1)
+    # Clear previous inputs to handle consecutive uses without restarting the app
+    input_row.clear()
 
-    input_value_2 = entry_var_2.get()
-    input_row.append(input_value_2)
+    # Collect input values from entry widgets and convert them to floats
+    try:
+        input_temperatures = [
+            float(entry_var_1.get()),
+            float(entry_var_2.get()),
+            float(entry_var_3.get()),
+            float(entry_var_4.get()),
+            float(entry_var_5.get()),
+            float(entry_var_6.get()),
+            float(entry_var_7.get()),
+        ]
+    except ValueError:
+        print("Please enter valid numeric values for temperatures.")
+        return  # Exits the function if conversion fails
 
-    input_value_3 = entry_var_3.get()
-    input_row.append(input_value_3)
+    try:
+        threshold = float(entry_var_threshold.get())
+    except ValueError:
+        print("Please enter a valid numeric value for the threshold.")
+        return  # Exits the function if conversion fails
 
-    input_value_4 = entry_var_4.get()
-    input_row.append(input_value_4)
-
-    input_value_5 = entry_var_5.get()
-    input_row.append(input_value_5)
-
-    input_value_6 = entry_var_6.get()
-    input_row.append(input_value_6)
-
-    input_value_7 = entry_var_7.get()
-    input_row.append(input_value_7)
-
-    input_value_threshold = entry_var_threshold.get()
-    input_row.append(input_value_threshold)
+    # Call the function with the DataFrame
+    similar_periods = searching_difference(input_temperatures, final_data, threshold)
+    for index, period in enumerate(similar_periods):
+            print(f"Similar period {index + 1}:\n", period, "\n")
     
-
-    source_energy = optionmenu_1.get()
-    method_selected = combobox_1.get()
-
-    print("Selected option from OptionMenu:", source_energy)
-    print("Selected option from ComboBox:", method_selected)
-
-    Teperature_input = ', '.join(input_row)
-    print("The entered value is:", Teperature_input)
-
-
-
+    print('We have found', len(similar_periods), 'similar periods')
+    # Your existing logic for handling the output from searching_difference follows...
 
 
 
