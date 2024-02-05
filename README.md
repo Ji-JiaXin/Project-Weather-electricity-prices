@@ -1,5 +1,5 @@
 # Project-Weather-electricity-prices
-Welcome to our Python project for “Data Processing in Python” (JEM207) aimed at exploring the relationship between weather conditions, especially air temperature, and electricity consumption and generation in Germany. Given that Germany's energy mix is predominantly comprised of renewables, weather should be a significant factor influencing electricity suplly and demand. We prepared a module that allows users to input temperatures from previous days. The module will analyze historical weather data and identify timeperiods when weather conditions closely resemble the provided input. The user can also set the threshold setting the allowance for consideration of past time periods as similar, in the matter of weather situation.
+Welcome to our Python project for “Data Processing in Python” (JEM207) aimed at exploring the relationship between weather conditions, especially air temperature, and electricity consumption and generation in Germany. Given that Germany's energy mix is predominantly comprised of renewables, the weather should be a significant factor influencing electricity supply and demand. We prepared a module that allows users to input temperatures from previous days. The module will analyze historical weather data and identify periods when weather conditions closely resemble the provided input. The user can also set the threshold, which enables him to regulate how strict the similarity between the weather patterns must be (scale of 1-8, the higher the number the less strict the condition -> higher number of similar weather patterns). 
 
 The ultimate goal is to provide the user with information regarding the development of the monitored indicator during the past periods with similar weather conditions. 
 
@@ -17,7 +17,7 @@ From the graph, you can further conclude, whether your chosen variable has a sim
 <pre>
 cd file_path
 </pre>
-Press enter to execute. To clone the repository simply use the following command and execute.
+Press enter to execute. To clone the repository use the following command and execute.
 <pre>
 git clone https://github.com/Ji-JiaXin/Project-Weather-electricity-prices.git
 </pre>
@@ -35,17 +35,17 @@ pip install -r requirements.txt
 5. To open the user interface, please run "User_interface.py" using your preferred code editor/runner (for example Virtual Studio Code - https://code.visualstudio.com/download). 
 
 ## About the data sources
-The data about electricity generation from different sources (offshore wind, onshore wind, photovoltaics, pump storage, other conventional sources, and other renewables) and total electricity consumption are downloaded using API. Using the class DownloadAPI specified in the "Electricity_API_download.py" the user can download data based on his preferences. This class is very powerful as it downloads data from https://smard.de/app based on the multiple parameters that could be specified, such as region (Germany, Austria...) or frequency (quarter-hour, hour, day, week...).
+The data about electricity generation from different sources (offshore wind, onshore wind, photovoltaics, pump storage, other conventional sources, and other renewables) and total electricity consumption are downloaded using API. Using the class DownloadAPI specified in the "Electricity_API_download.py" the user can download data based on his preferences. This class is very powerful as it downloads data from https://smard.de/app based on the multiple parameters that could be specified, such as region (Germany, Austria...) or frequency (quarter-hour, hour, day, week...). Therefore, you are more than welcome to reuse this module in your electricity-related project! The class DownloadAPI was inspired by the GitHub repository (https://github.com/bundesAPI/smard-api). The code was modified to ensure its proper functionality and desired features. 
 
-The weather data is composed from various online sources, as we were not able to find one reliable free provider, which would satisfy our data requirements. Therefore, we merged data from different sources ("Weather_base.xlsx" and "Weather_new.csv") into one final file ("All_weather_data.csv). 
+The weather data is composed of various online sources, as we could not find one reliable free provider that would satisfy our data requirements. Therefore, we merged data from different sources ("Weather_base.xlsx" and "Weather_new.csv") into one final file ("All_weather_data.csv). 
 
-For our analysis, we merged the data about electricity (from API) with the final weather data into one data frame ("final_data.csv"). Everything about the data preparation can be found in one file ("Data_preparation.csv").
+For our analysis, we merged the data about electricity (from API) with the final weather data into one data frame ("final_data.csv"). Everything about the data preparation can be found in one file ("Data_preparation.py").
 
 ## Models for finding similar weather patterns
 
 
 
 ## Graphics
-Based on the previous analysis we provide a graphical visualization for you, as sometimes a nice graphical visualization is worth more than thousend words. There are two types of graphs you can choose from - either a graph covering the whole period or a set of more detailed subgraphs displaying each yearly development. The output dates from the model for finding similar weather patterns are also incorporated in the graph (highlighted in red).  
+Based on the previous analysis we provide a graphical visualization for you, as sometimes a nice graphical visualization is worth more than a thousand words. There are two types of graphs you can choose from - either a graph covering the whole period or a set of more detailed subgraphs displaying each yearly development. The output dates from the model for finding similar weather patterns are also incorporated in the graph (highlighted in red).  
 
 
