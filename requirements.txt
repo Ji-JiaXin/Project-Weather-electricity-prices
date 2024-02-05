@@ -1,5 +1,5 @@
 deutschland
 pandas
 numpy
+os
 customtkinter
-
