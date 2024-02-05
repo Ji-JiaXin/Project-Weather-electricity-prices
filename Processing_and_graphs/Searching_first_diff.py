@@ -8,8 +8,8 @@ import numpy as np
 
 # preparign the data
 # Path to the new working directory
-#new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Data"
-new_directory = "c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs"
+new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
+#new_directory = "c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs"
 
 # Change the current working directory
 os.chdir(new_directory)
@@ -52,7 +52,6 @@ def searching_difference(input_temperatures, data, threshold):
     return similar_periods
 
 
-# The rest works the same as in Sqr diff calculation
 def get_temperature_input():
     """
     Function created for collecting the input.
@@ -71,10 +70,10 @@ def get_temperature_input():
             # Separating the temperatures and the threshold
             temperatures = input_numbers[:7]
             threshold = input_numbers[7]
-            print(temperatures)
+
             return temperatures, threshold
         except ValueError as e:
-            # Handling invalid input, reminding the input has to be comma seperated
+            # Handling invalid input
             print("Invalid input. Please enter 7 temperatures and 1 threshold, all separated by commas. Error:", e)
 
 # Loading the merged file
@@ -91,6 +90,6 @@ if similar_periods == []:
 
 for index, period in enumerate(similar_periods):
     print(f"Similar period {index + 1}:\n", period, "\n")
+    print('We have found',len(similar_periods),'similar periods')
 
-print('We have found',len(similar_periods),'similar periods')
 
