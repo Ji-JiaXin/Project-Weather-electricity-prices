@@ -42,10 +42,14 @@ The weather data is composed of various online sources, as we could not find one
 For our analysis, we merged the data about electricity (from API) with the final weather data into one data frame ("final_data.csv"). Everything about the data preparation can be found in one file ("Data_preparation.py").
 
 ## Models for finding similar weather patterns
+To find similar weather patterns, you can choose from two different methods. Both of them are based on differences between the input temperature values. 
 
-
+The method "First difference" calculates the first difference of the values and makes a comparison with the first difference of temperature values in the dataset. Using the threshold it filters only those periods when the sum of squared differences falls below the inserted threshold. On the other hand, the second method "Direct sum of squared" directly compares the sum of squared differences between the inut temperature values and the values in the dataset, filtering out only those that fall below the threshhold.   
 
 ## Graphics
 Based on the previous analysis we provide a graphical visualization for you, as sometimes a nice graphical visualization is worth more than a thousand words. There are two types of graphs you can choose from - either a graph covering the whole period or a set of more detailed subgraphs displaying each yearly development. The output dates from the model for finding similar weather patterns are also incorporated in the graph (highlighted in red).  
+
+## Final words
+We tried our best to offer you a module which would provide you with interesting insights on the relationship between weather temperature and your chosen electricity-related variable. However, due to data restrictions and other factors we were not able to ensure the quality of our weather data. Additionaly, we tried to cover all possible errors that may arise by invalid user input, but there might still be some that we have missed. Lastly, we would be delighted for your comments, feedbacks and pull requests that will allow us to make the module work better and smoother! Thank you and have fun!
 
 

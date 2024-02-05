@@ -7,7 +7,9 @@ import pandas as pd
 
 import sys
 # Add the folder path to the sys.path
-sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs")
+#sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs")
+sys.path.append("c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs")
+
 from Searching_first_diff import searching_difference
 
 customtkinter.set_ctk_parent_class(tkinter.Tk)
@@ -16,7 +18,9 @@ customtkinter.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark",
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 # Choose your path
-final_data = pd.read_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/final_data.csv')
+#final_data = pd.read_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/final_data.csv')
+final_data = pd.read_csv('c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs/final_data.csv')
+
 input_row = []
 
 import pandas as pd 
