@@ -1,5 +1,11 @@
 import pandas as pd
+import os
 
+# Path to the new working directory
+new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
+
+# Changing the current working directory
+os.chdir(new_directory)
 
 class Data_prep(object):
     """
@@ -38,7 +44,7 @@ class Data_prep(object):
         None. Saves the merged data to a CSV file.
         """
 
-    def process_and_merge_weather_data(weather_base, weather_new):
+    def process_and_merge_weather_data(self, weather_base, weather_new):
         """
         Firstly, reading base excel file "Weather_base.xlsx" with weather data, renaming, dropping NAs, converting date into datetime object. 
         Secondly, reading "weather_new.csv" file, converting date column into proper datetime object, dropping out null values and final aggregation. 
@@ -106,7 +112,7 @@ class Data_prep(object):
         
         merged_weather.to_csv('All_weather_data.csv', index = False, encoding='windows-1252')
 
-    def merge_and_process_data(weather_data_path, value_data_path, output_file_path):
+    def merge_and_process_data(self, weather_data_path, value_data_path, output_file_path):
         """
         Merging two files "All_weather_data.csv" with "value.csv", removing duplicates, renaming columns and saving into csv format.
 
@@ -135,3 +141,18 @@ class Data_prep(object):
         
         # Saving the merged data to a new file
         merged_data.to_csv(output_file_path, index=False)
+
+weather_base = "Weather_base.xlsx"
+weather_new = 'Weather_new.csv'
+
+weather_data_path = 'All_weather_data.csv'
+value_data_path = 'Value.csv'
+output_file_path = "final_data.csv"
+# Create an instance of the class
+my_instance = Data_prep()
+
+# Call the function
+my_instance.process_and_merge_weather_data(weather_base, weather_new)
+
+
+my_instance.merge_and_process_data(weather_data_path, value_data_path, output_file_path)
