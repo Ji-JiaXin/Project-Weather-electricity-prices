@@ -6,12 +6,14 @@ import tkinter
 import pandas as pd
 import sys
 
-sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices")
-#sys.path.append("c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs")
+#sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices")
+sys.path.append("c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices")
 
 from Processing_and_graphs.Searching_diff import searching_difference_diff
 from Processing_and_graphs.Searching_normal import searching_difference_normal
 from Processing_and_graphs.Data_preparation import Data_prep
+from Processing_and_graphs.Electricity_API_download_data_latest import DownloadAPI
+from Processing_and_graphs.Graphics import Visualisator
 
 from deutschland import smard
 from deutschland.smard import Configuration
@@ -19,23 +21,22 @@ from deutschland.smard.api_client import ApiClient
 from deutschland.smard.api_client import Endpoint as _Endpoint
 from deutschland.smard.model.indices import Indices
 from deutschland.smard.model.time_series import TimeSeries
-from Processing_and_graphs.Electricity_API_download_data_latest import DownloadAPI
+
 
 config = Configuration(host="https://www.smard.de/app", discard_unknown_keys=True)
 api_client = ApiClient(config)
 download_api = DownloadAPI(api_client)
 
 
-
-
+#GUI
 customtkinter.set_ctk_parent_class(tkinter.Tk)
 
 customtkinter.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 # Choose your path
-final_data = pd.read_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/final_data.csv')
-#final_data = pd.read_csv('c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs/final_data.csv')
+#final_data = pd.read_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/final_data.csv')
+final_data = pd.read_csv('c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs/final_data.csv')
 
 weather_base = "Weather_base.xlsx"
 weather_new = 'Weather_new.csv'
@@ -46,12 +47,11 @@ output_file_path = "final_data.csv"
 
 input_row = []
 
-import pandas as pd 
 
 def retrieve_input():
     source = optionmenu_1.get()
-    
-    
+
+    ##1.step - Based on the user selected source, we download the data from API 
     if source == "Generation off shore wind":
         energy_source = "Generation off shore wind"
     elif source == "Generation from other convential sources":
@@ -69,27 +69,22 @@ def retrieve_input():
     else:
         print("Invalid source selected.")
         return
-
-
-
-
+    #downloading the data 
     API_values = download_api.download_chart_data_by_name(filter_word= energy_source, filter_word_copy=energy_source, region="DE", region_copy="DE")
-    API_values.to_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/API_values.csv', index = False, encoding='windows-1252')
+    #API_values.to_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/API_values.csv', index = False, encoding='windows-1252')
+    API_values.to_csv('c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs/API_values', index = False, encoding='windows-1252')
 
-
+    ##2.step - preparing and merging weather data 
     data_preparer = Data_prep()
-
     # Call the function
     data_preparer.process_and_merge_weather_data(weather_base, weather_new)
-
-
     data_preparer.merge_and_process_data(weather_data_path, value_data_path, output_file_path)
-    
     input_row.clear()
-    
+
+    ##3.step - getting the chosen method from user, some input validation (temperature must be numeric, exactly 7 values + 1 threshold) 
     # Retrieve the method selected by the user
     method = combobox_1.get()
-
+    # input validation
     try:
         input_temperatures = [
             float(entry_var_1.get()),
@@ -123,8 +118,17 @@ def retrieve_input():
         print(f"Similar period {index + 1}:\n", period, "\n")
     
     print('We have found', len(similar_periods), 'similar periods')
-
-
+    
+    ##4. Creating graphs
+    graph_choice = combobox_2.get()
+    # Call the appropriate function based on the selected method
+    if graph_choice == "For each year":
+        Visualisator.graph_creator_year(similar_periods)
+    elif graph_choice == "Whole period":
+        Visualisator.graph_creator_one_period(similar_periods)
+    else:
+        print("Invalid type of graph selected.")
+        return
 
 
 root = customtkinter.CTk()
@@ -181,6 +185,10 @@ optionmenu_1.set("Source")
 combobox_1 = customtkinter.CTkComboBox(frame, values=["Normal", "Differentiated"])
 combobox_1.pack(pady=10, padx=10)
 combobox_1.set("Method")
+
+combobox_2 = customtkinter.CTkComboBox(frame, values=["For each year", "Whole period"])
+combobox_2.pack(pady=10, padx=10)
+combobox_2.set("Graph")
 
 button = customtkinter.CTkButton(master = frame, text = "Find", command= retrieve_input)
 button.pack(pady=12,padx=10)

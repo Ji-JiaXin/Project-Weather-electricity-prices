@@ -5,10 +5,11 @@ import pandas as pd
 import numpy as np
 import os
 # Path to the new working directory
-new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
+#new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
+#new_directory = "c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs"
 
 # Change the current working directory
-os.chdir(new_directory)
+#os.chdir(new_directory)
 
 #Verify the change
 #print("New working directory:", os.getcwd())

@@ -8,12 +8,8 @@ import datetime
 #new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
 new_directory = "C:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs"
 
-# Path to the new working directory
-#new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
-
 # Change the current working directory
 os.chdir(new_directory)
-
 
 # Graph
 class Visualisator(object):
@@ -27,20 +23,20 @@ class Visualisator(object):
 
     Methods
     ----------
-    graph_creator_one_period(output_dates):
+    graph_creator_one_period(similar_periods):
         Creating a graph covering the whole time period of the data. Uses the "final_data.csv", creates a plot describing the envolvement of temperature and values over time.
         It also highlights dates with similar weather pattern. 
     
-    graph_creator_year(output_dates):
+    graph_creator_year(similar_periods):
         Creating a series of subplots in a 3x4 grid, each representing a certain year. Similarly to previous method, it plots the temperature and values over time and highlights dates with similar patterns. 
     """
-    def graph_creator_one_period(output_dates):
+    def graph_creator_one_period(similar_periods):
         """
         Loading of the final_data.csv, plotting of two variables over time (temperature, values). 
         Highlighting the dates with similar weather patterns (the output from searching_first_diff.py or searching_sqr_diff.py).
         
         Parameters:
-            output_dates - A set of dates from searching_first_diff.py or searching_sqr_diff.py
+            similar_periods - A set of dates from searching_first_diff.py or searching_sqr_diff.py
         
         Returns:
         A plot displaying the relationship between temperature and the downloaded data from API with highlighted days.  
@@ -67,25 +63,25 @@ class Visualisator(object):
         axes_values.tick_params(axis='y', labelcolor=color_outline)
 
         #highlight the output days from the function searching for similar weather patterns by - adding dotted lines
-        for period in output_dates:
+        for period in similar_periods:
             for day in period['Date']:
                 axes_temperature.axvline(pd.to_datetime(day), color='red', linestyle=':', linewidth=2, zorder=2)
 
         # Adding a legend and title 
         fig.tight_layout()
-        fig.legend(loc='upper left', bbox_to_anchor=(0.6,0.95))
+        #fig.legend(loc='upper left', bbox_to_anchor=(0.6,0.95))
         plt.title('Relationship between Temperature and Values')
 
         # Displaying the plot
         plt.show()
 
-    def graph_creator_year(output_dates):
+    def graph_creator_year(similar_periods):
         """
         Loading of the final_data.csv, creating subplots into a grid 3x4 with a use of for loop. 
         Highlighting the dates with similar weather patterns (the output from searching_first_diff.py or searching_sqr_diff.py).
     
         Parameters:
-            output_dates - A set of dates from searching_first_diff.py or searching_sqr_diff.py
+            similar_periods - A set of dates from searching_first_diff.py or searching_sqr_diff.py
         
         Returns:
         Subplots displaying the relationship between temperature and the downloaded data from API with highlighted days.  
@@ -125,14 +121,14 @@ class Visualisator(object):
             axes_temp.tick_params(axis='y', labelsize=5)
 
             #iterating trough the dataset searching if the date is there and then putting a dotted line in the graph
-            output_dates_str = output_dates.copy()  # Create a copy as we do not want to modify our original data
-            for similar_period_df in output_dates_str: 
+            similar_periods_str = similar_periods.copy()  # Create a copy as we do not want to modify our original data
+            for similar_period_df in similar_periods_str: 
                 #we need to reshape the Date column into string, using lambda function (only if the Date is datetime.datetime otherwise do nothing)
                 #also we need to use .loc to avoid setting with copy warning
                 similar_period_df.loc[:,'Date'] = similar_period_df['Date'].apply(lambda x: x.strftime('%Y-%m-%d') if isinstance(x, datetime.datetime) else x)
 
                 # Highlight specific dates by iterating through the dataset and checking if the date is in df_year
-            for similar_period_df in output_dates_str:
+            for similar_period_df in similar_periods_str:
                 for day in similar_period_df['Date']:
                     if day in df_year['Date'].astype(str).values:
                         axes_years[n].axvline(pd.to_datetime(day), color='red', linestyle=':', linewidth=1)
@@ -145,7 +141,8 @@ class Visualisator(object):
 
 
 # Call the function to get similar dates
-#output_dates = searching_difference(input_temperatures, merged_data, threshold)
+#similar_periods = searching_difference_diff(input_temperatures, final_data, threshold)
+#similar_periods = searching_difference_normal(input_temperatures, final_data, threshold)
 
-#Visualisator.graph_creator_year(output_dates)
-#Visualisator.graph_creator_one_period(output_dates)
+#Visualisator.graph_creator_year(similar_periods)
+#Visualisator.graph_creator_one_period(similar_periods)
