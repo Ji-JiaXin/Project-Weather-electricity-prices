@@ -4,14 +4,29 @@
 import customtkinter
 import tkinter
 import pandas as pd
-
 import sys
-# Add the folder path to the sys.path
+
 sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices")
 #sys.path.append("c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs")
 
 from Processing_and_graphs.Searching_diff import searching_difference_diff
 from Processing_and_graphs.Searching_normal import searching_difference_normal
+from Processing_and_graphs.Data_preparation import Data_prep
+
+from deutschland import smard
+from deutschland.smard import Configuration
+from deutschland.smard.api_client import ApiClient
+from deutschland.smard.api_client import Endpoint as _Endpoint
+from deutschland.smard.model.indices import Indices
+from deutschland.smard.model.time_series import TimeSeries
+from Processing_and_graphs.Electricity_API_download_data_latest import DownloadAPI
+
+config = Configuration(host="https://www.smard.de/app", discard_unknown_keys=True)
+api_client = ApiClient(config)
+download_api = DownloadAPI(api_client)
+
+
+
 
 customtkinter.set_ctk_parent_class(tkinter.Tk)
 
@@ -22,11 +37,54 @@ customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "gre
 final_data = pd.read_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/final_data.csv')
 #final_data = pd.read_csv('c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs/final_data.csv')
 
+weather_base = "Weather_base.xlsx"
+weather_new = 'Weather_new.csv'
+
+weather_data_path = 'All_weather_data.csv'
+value_data_path = 'API_values.csv'
+output_file_path = "final_data.csv"
+
 input_row = []
 
 import pandas as pd 
 
 def retrieve_input():
+    source = optionmenu_1.get()
+    
+    
+    if source == "Generation off shore wind":
+        energy_source = "Generation off shore wind"
+    elif source == "Generation from other convential sources":
+        energy_source = "Generation from other convential sources"
+    elif source == "Generation from other renewables":
+        energy_source = "Generation from other renewables"
+    elif source == "Generation on shore wind":
+        energy_source = "Generation on shore wind"
+    elif source == "Generation from photovoltaics":
+        energy_source = "Generation from photovoltaics"
+    elif source == "Generation from pumper storage":
+        energy_source = "Generation from pumper storage"
+    elif source == "Total electricity consumption":
+        energy_source = "Total electricity consumption"
+    else:
+        print("Invalid source selected.")
+        return
+
+
+
+
+    API_values = download_api.download_chart_data_by_name(filter_word= energy_source, filter_word_copy=energy_source, region="DE", region_copy="DE")
+    API_values.to_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/API_values.csv', index = False, encoding='windows-1252')
+
+
+    data_preparer = Data_prep()
+
+    # Call the function
+    data_preparer.process_and_merge_weather_data(weather_base, weather_new)
+
+
+    data_preparer.merge_and_process_data(weather_data_path, value_data_path, output_file_path)
+    
     input_row.clear()
     
     # Retrieve the method selected by the user
@@ -118,7 +176,7 @@ optionmenu_1 = customtkinter.CTkOptionMenu(frame, values=["Generation off shore 
             "Generation on shore wind", "Generation from photovoltaics",
             "Generation from pumper storage", "Total electricity consumption"])
 optionmenu_1.pack(pady=10, padx=10)
-optionmenu_1.set("Sources")
+optionmenu_1.set("Source")
 
 combobox_1 = customtkinter.CTkComboBox(frame, values=["Normal", "Differentiated"])
 combobox_1.pack(pady=10, padx=10)

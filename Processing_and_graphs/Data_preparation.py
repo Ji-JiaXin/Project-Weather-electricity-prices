@@ -107,17 +107,15 @@ class Data_prep(object):
         # Saving the merged data to a new file
         merged_data.to_csv(output_file_path, index=False)
 
-weather_base = "Weather_base.xlsx"
-weather_new = 'Weather_new.csv'
+#weather_base = "Weather_base.xlsx"
+#weather_new = 'Weather_new.csv'
 
-weather_data_path = 'All_weather_data.csv'
-value_data_path = 'Value.csv'
-output_file_path = "final_data.csv"
-# Create an instance of the class
-my_instance = Data_prep()
+#weather_data_path = 'All_weather_data.csv'
+#value_data_path = 'Value.csv'
+#output_file_path = "final_data.csv"
 
-# Call the function
-my_instance.process_and_merge_weather_data(weather_base, weather_new)
+#Data_prep().process_and_merge_weather_data(weather_base, weather_new)
 
 
-my_instance.merge_and_process_data(weather_data_path, value_data_path, output_file_path)
+#Data_prep().merge_and_process_data(weather_data_path, value_data_path, output_file_path)
+        

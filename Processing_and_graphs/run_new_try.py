@@ -2,7 +2,7 @@ from User_interface import retrieve_input
 from Electricity_API_download_data_latest import DownloadAPI
 from Data_preparation import Data_prep
 import Processing_and_graphs.Searching_diff as Searching_Diff
-import Processing_and_graphs.Searching_noraml as Searching_noraml
+import Processing_and_graphs.Searching_normal as Searching_noraml
 from Graphics import Visualisator
 
 

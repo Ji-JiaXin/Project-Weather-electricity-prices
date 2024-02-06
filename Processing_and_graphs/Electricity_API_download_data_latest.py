@@ -5,7 +5,6 @@
 #import package
 from deutschland import smard
 
-#importing packages
 import pandas as pd
 
 from deutschland.smard import Configuration
@@ -411,16 +410,17 @@ class DownloadAPI(object):
 
     
 
-config = Configuration(host="https://www.smard.de/app", discard_unknown_keys=True)
-api_client = ApiClient(config)
-download_api = DownloadAPI(api_client)
+#config = Configuration(host="https://www.smard.de/app", discard_unknown_keys=True)
+#api_client = ApiClient(config)
+#download_api = DownloadAPI(api_client)
 
 #downloading example data 
 #Elect_gen_onshore_wind = download_api.download_chart_data(filter=4067, filter_copy=4067,region="DE", region_copy="DE")
 #print(Elect_gen_onshore_wind)
 
-#Elect_gen_offshore_wind = download_api.download_chart_data_by_name(filter_word="Generation from photovoltaics", filter_word_copy="Generation from photovoltaics", region="DE", region_copy="DE")
-#print(Elect_gen_offshore_wind)
+#API_values = download_api.download_chart_data_by_name(filter_word="Generation from photovoltaics", filter_word_copy="Generation from photovoltaics", region="DE", region_copy="DE")
+#API_values.to_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/API_values.csv', index = False, encoding='windows-1252')
+#print(API_values)
 
 # Variables of interest:
 # 1125: Generation off shore wind
