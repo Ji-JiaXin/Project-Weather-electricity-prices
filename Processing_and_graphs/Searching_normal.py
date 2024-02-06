@@ -14,7 +14,7 @@ os.chdir(new_directory)
 #print("New working directory:", os.getcwd())
 
 
-def searching_difference(input_temperatures, final_data, threshold):
+def searching_difference_normal(input_temperatures, final_data, threshold):
     """
     Function takes the data from input, search whole dataset
       and find time periods with similar temperatures.
@@ -70,18 +70,18 @@ def get_temperature_input():
 
 
 # Load the merged file
-final_data = pd.read_csv('final_data.csv')
+#final_data = pd.read_csv('final_data.csv')
 
 # Example usage
-input_temperatures, threshold = get_temperature_input()
+#input_temperatures, threshold = get_temperature_input()
 
 # Find similar temperature periods
-similar_periods = searching_difference(input_temperatures, final_data, threshold)
-print(similar_periods)
+#similar_periods = searching_difference_normal(input_temperatures, final_data, threshold)
+#print(similar_periods)
 
-if similar_periods == []:
-    print("We have found NO similar periods.You are to strict. Try to set higer threshold (8th number in the input).")
+#if similar_periods == []:
+    #print("We have found NO similar periods.You are to strict. Try to set higer threshold (8th number in the input).")
 
-for index, period in enumerate(similar_periods):
-    print(f"Similar period {index + 1}:\n", period, "\n")
-    print("We have found", index + 1, "similar periods")
+#for index, period in enumerate(similar_periods):
+    #print(f"Similar period {index + 1}:\n", period, "\n")
+    #print("We have found", index + 1, "similar periods")

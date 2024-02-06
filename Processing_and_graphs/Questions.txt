@@ -1,0 +1,6 @@
+1) Proč po spustění from ... import ... se spustí celý ten soubor a ne jenom daná funkce
+
+2) Jak nahradit working directory něčím obecnějším, aby to fungovalo všude
+
+3) Jak dát do kolonky nápis, ale zároveň z ní vzít hodnotu
+

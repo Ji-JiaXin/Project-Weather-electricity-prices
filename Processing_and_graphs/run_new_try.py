@@ -1,8 +1,8 @@
 from User_interface import retrieve_input
 from Electricity_API_download_data_latest import DownloadAPI
 from Data_preparation import Data_prep
-import Searching_first_diff
-import Searching_sqr_diff
+import Processing_and_graphs.Searching_diff as Searching_Diff
+import Processing_and_graphs.Searching_noraml as Searching_noraml
 from Graphics import Visualisator
 
 

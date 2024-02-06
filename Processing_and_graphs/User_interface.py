@@ -7,10 +7,11 @@ import pandas as pd
 
 import sys
 # Add the folder path to the sys.path
-sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs")
+sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices")
 #sys.path.append("c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs")
 
-from Searching_first_diff import searching_difference
+from Processing_and_graphs.Searching_diff import searching_difference_diff
+from Processing_and_graphs.Searching_normal import searching_difference_normal
 
 customtkinter.set_ctk_parent_class(tkinter.Tk)
 
@@ -27,6 +28,9 @@ import pandas as pd
 
 def retrieve_input():
     input_row.clear()
+    
+    # Retrieve the method selected by the user
+    method = combobox_1.get()
 
     try:
         input_temperatures = [
@@ -40,20 +44,28 @@ def retrieve_input():
         ]
     except ValueError:
         print("Please enter valid numeric values for temperatures.")
-        return  
+        return
 
     try:
         threshold = float(entry_var_threshold.get())
     except ValueError:
         print("Please enter a valid numeric value for the threshold.")
-        return 
+        return
 
-    similar_periods = searching_difference(input_temperatures, final_data, threshold)
-    
+    # Call the appropriate function based on the selected method
+    if method == "Normal":
+        similar_periods = searching_difference_normal(input_temperatures, final_data, threshold)
+    elif method == "Differentiated":
+        similar_periods = searching_difference_diff(input_temperatures, final_data, threshold)
+    else:
+        print("Invalid method selected.")
+        return
+
     for index, period in enumerate(similar_periods):
-            print(f"Similar period {index + 1}:\n", period, "\n")
+        print(f"Similar period {index + 1}:\n", period, "\n")
     
     print('We have found', len(similar_periods), 'similar periods')
+
 
 
 
@@ -108,7 +120,7 @@ optionmenu_1 = customtkinter.CTkOptionMenu(frame, values=["Generation off shore 
 optionmenu_1.pack(pady=10, padx=10)
 optionmenu_1.set("Sources")
 
-combobox_1 = customtkinter.CTkComboBox(frame, values=["Simple sq. diff", "Differenceated"])
+combobox_1 = customtkinter.CTkComboBox(frame, values=["Normal", "Differentiated"])
 combobox_1.pack(pady=10, padx=10)
 combobox_1.set("Method")
 

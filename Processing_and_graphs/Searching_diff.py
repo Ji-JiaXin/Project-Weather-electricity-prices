@@ -18,7 +18,7 @@ import numpy as np
 #print("New working directory:", os.getcwd())
 
 
-def searching_difference(input_temperatures, final_data, threshold):
+def searching_difference_diff(input_temperatures, final_data, threshold):
     """
     Function takes the data from input, computes the first difference of input values, 
     searches the dataset and finds time periods with similar temperature differences.
@@ -83,7 +83,7 @@ def get_temperature_input():
 #input_temperatures, threshold = get_temperature_input()
 
 # Find similar temperature difference periods
-#similar_periods = searching_difference(input_temperatures, final_data, threshold)
+#similar_periods = searching_difference_diff(input_temperatures, final_data, threshold)
 
 #if similar_periods == []:
     #print("We have found NO similar periods. You are too strict. Try to set a higher threshold (8th number in the input).")
