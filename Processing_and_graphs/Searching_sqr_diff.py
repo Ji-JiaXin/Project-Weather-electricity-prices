@@ -10,11 +10,11 @@ new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Proce
 # Change the current working directory
 os.chdir(new_directory)
 
-# Verify the change
+#Verify the change
 #print("New working directory:", os.getcwd())
 
 
-def searching_difference(input_temperatures, data, threshold):
+def searching_difference(input_temperatures, final_data, threshold):
     """
     Function takes the data from input, search whole dataset
       and find time periods with similar temperatures.
@@ -26,12 +26,12 @@ def searching_difference(input_temperatures, data, threshold):
     #initializing an empty list for stucking the similar periods
     similar_periods = []
 
-    # Iterating through the 'Data' and checking 7-day periods
-    for i in range(len(data) - 6):
+    # Iterating through the 'final_data' and checking 7-day periods
+    for i in range(len(final_data) - 6):
         """ For each period, calculate the sum of square diff. between
             Temperatures and input Temperatures
            """
-        current_period = data.iloc[i:i+7]
+        current_period = final_data.iloc[i:i+7]
         current_temperatures = current_period['Temperature'].tolist()
         diff = sum((np.array(current_temperatures) - np.array(input_temperatures))**2)
 
@@ -70,20 +70,18 @@ def get_temperature_input():
 
 
 # Load the merged file
-file_path = 'final_data.csv'
-merged_data = pd.read_csv(file_path)
-
+final_data = pd.read_csv('final_data.csv')
 
 # Example usage
 input_temperatures, threshold = get_temperature_input()
 
 # Find similar temperature periods
-similar_periods = searching_difference(input_temperatures, merged_data, threshold)
+similar_periods = searching_difference(input_temperatures, final_data, threshold)
 print(similar_periods)
-#if similar_periods == []:
-    #print("We have found NO similar periods.You are to strict. Try to set higer threshold (8th number in the input).")
 
-#for index, period in enumerate(similar_periods):
+if similar_periods == []:
+    print("We have found NO similar periods.You are to strict. Try to set higer threshold (8th number in the input).")
 
-    #print(f"Similar period {index + 1}:\n", period, "\n")
-    #print("We have found", index + 1, "similar periods")
+for index, period in enumerate(similar_periods):
+    print(f"Similar period {index + 1}:\n", period, "\n")
+    print("We have found", index + 1, "similar periods")

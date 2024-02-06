@@ -30,13 +30,13 @@ def searching_difference(input_temperatures, final_data, threshold):
 
     # Usinf Numpy to compute the first difference of the input temperatures
     input_diff = np.diff(input_temperatures)
-
-    # Initializing an empty list for stacking the similar periods
-    similar_periods = []
-
+    
     # Adding a Temperature_Diff column to the merged_data
     final_data['Temperature_Diff'] = final_data['Temperature'].diff().fillna(0)
     
+    # Initializing an empty list for stacking the similar periods
+    similar_periods = []
+
     # Iterating through the 'Data' and checking 6-day periods (since we're comparing differences)
     for i in range(len(final_data) - 5):
         # For each period, calculate the sum of squared differences between
@@ -49,8 +49,6 @@ def searching_difference(input_temperatures, final_data, threshold):
         if diff <= threshold:
             similar_periods.append(current_period)
     
-    print(similar_periods)
-
     return similar_periods
 
 
