@@ -1,19 +1,14 @@
 # Project-Weather-electricity-prices
-Welcome to our Python project for “Data Processing in Python” (JEM207) aimed at exploring the relationship between weather conditions, especially air temperature, and electricity consumption and generation in Germany. Given that Germany's energy mix is predominantly comprised of renewables, the weather should be a significant factor influencing electricity supply and demand. We prepared a module that allows users to input temperatures from previous days. The module will analyze historical weather data and identify periods when weather conditions closely resemble the provided input. The user can also set the threshold, which enables him to regulate how strict the similarity between the weather patterns must be (scale of 1-8, the higher the number the less strict the condition -> higher number of similar weather patterns). 
+Welcome to our Python project for “Data Processing in Python” (JEM207) aimed at exploring the relationship between weather conditions (especially air temperature) and electricity consumption and generation in Germany. Given that Germany's energy mix is predominantly comprised of renewables, the weather should be a significant factor influencing electricity supply and demand. We prepared a module that allows users to input temperatures. The module will analyze historical weather data and identify periods when weather conditions closely resemble the provided input. The user can also set the threshold, which enables him to regulate how strict the similarity between the weather patterns must be (scale of 1-8, the higher the number the less strict the condition -> higher number of similar weather patterns). 
 
 The ultimate goal is to provide the user with information regarding the development of the monitored indicator during the past periods with similar weather conditions. 
 
 Join us on this exciting journey, and let us explore together the impact of weather on electricity flow within the German energy system!
 
-## How does the user interface work?
-For your simplicity and comfortability, we have created a simple modern-looking graphical user interface (GUI). You can insert the 7 temperatures in °c, set the threshold, choose the preferred variable you want to examine, and lastly, the method you want to use.
-Click on the run button and here the MAGIC happens. You should be provided with a graphical visualization of the relationship between your chosen variable and the temperature development over time. Furthermore, based on your inserted temperatures and the threshold, you can see highlighted periods in the graph which are the periods with similar weather temperature patterns as your inserted values. 
-From the graph, you can further conclude, whether your chosen variable has a similar trend to weather temperature. That is pretty cool, right?
-
 ## How to run the project on your device?
-1. Have installed Git on your device. You can download using the following link: https://git-scm.com/downloads. 
+1. Have installed Git on your device. You can download it using the following link: https://git-scm.com/downloads. 
 
-2. Start by cloning the project repository on your machine. Open command prompt or terminal (press the windows button on your keyboard and search for "terminal"/use "command + t" for macOS). Set your desired current working directory using this (replace "file_path" with your path in a similar form as "C:/Users/mypersonal/Desktop..." ):
+2. Start by cloning the project repository on your machine. Open command prompt or terminal (press the windows button on your keyboard and search for "terminal" or use "command + t" for macOS). Set your desired current working directory using this following command (replace "file_path" with your path in a similar form as "C:/Users/mypersonal/Desktop..." ):
 <pre>
 cd file_path
 </pre>
@@ -32,7 +27,16 @@ cd Project-Weather-electricity-prices
 pip install -r requirements.txt
 </pre>
 
-5. To open the user interface, please run "User_interface.py" using your preferred code editor/runner (for example Virtual Studio Code - https://code.visualstudio.com/download). 
+5. To open the user interface, please run the fie "User_interface.py" (you can find it in the "Running Python" folder) using your preferred code editor/runner (for example Virtual Studio Code - https://code.visualstudio.com/download). 
+
+6. Further proceed as described in following section "How does user interface work?". 
+
+## How does the user interface work?
+For your simplicity and comfortability, we have created a simple modern-looking graphical user interface (GUI). At the begining you will be ask to provide us with a directory where you have downloaded our repository (It should be something similar as: "C:\Users\Jakub\Desktop\Project-Weather-electricity-prices"). Then new pop up window will show up, where you will be asked to insert the 7 temperatures in °c, set the threshold, choose the preferred variable you want to examine, the method you want to use and lastly, the type of visualisation you are interested in. 
+
+By clicking "Find" button the MAGIC happens. You should be provided with a graphical visualization of the relationship between your chosen variable and the temperature development over time. Furthermore, based on your inserted temperatures and the threshold, you can see highlighted periods in the graph which are the periods with similar weather temperature patterns as your inserted values. 
+
+From the graph, you can further conclude, whether your chosen variable has a similar trend to weather temperature. That is pretty cool, right?
 
 ## About the data sources
 The data about electricity generation from different sources (offshore wind, onshore wind, photovoltaics, pump storage, other conventional sources, and other renewables) and total electricity consumption are downloaded using API. Using the class DownloadAPI specified in the "Electricity_API_download.py" the user can download data based on his preferences. This class is very powerful as it downloads data from https://smard.de/app based on the multiple parameters that could be specified, such as region (Germany, Austria...) or frequency (quarter-hour, hour, day, week...). Therefore, you are more than welcome to reuse this module in your electricity-related project! The class DownloadAPI was inspired by the GitHub repository (https://github.com/bundesAPI/smard-api). The code was modified to ensure its proper functionality and desired features. 
@@ -44,7 +48,7 @@ For our analysis, we merged the data about electricity (from API) with the final
 ## Models for finding similar weather patterns
 To find similar weather patterns, you can choose from two different methods. Both of them are based on differences between the input temperature values. 
 
-The method "First difference" calculates the first difference of the values and makes a comparison with the first difference of temperature values in the dataset. Using the threshold it filters only those periods when the sum of squared differences falls below the inserted threshold. On the other hand, the second method "Direct sum of squared" directly compares the sum of squared differences between the input temperature values and the values in the dataset, filtering out only those that fall below the threshold.   
+The method "Differenciated" calculates the first difference of the values and makes a comparison with the first difference of temperature values in the dataset. Using the threshold it filters out only those periods when the sum of squared differences falls below the inserted threshold. On the other hand, the second method "Normal" directly compares the sum of squared differences between the input temperature values and the values in the dataset, filtering out only those that fall below the threshold.   
 
 ## Graphics
 Based on the previous analysis we provide a graphical visualization for you, as sometimes a nice graphical visualization is worth more than a thousand words. There are two types of graphs you can choose from - either a graph covering the whole period or a set of more detailed subgraphs displaying each yearly development. The output dates from the model for finding similar weather patterns are also incorporated in the graph (highlighted in red).  
