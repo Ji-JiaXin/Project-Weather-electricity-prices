@@ -76,7 +76,7 @@ class Data_prep(object):
         merged_weather['Date'] = pd.to_datetime(merged_weather['Date'])
         merged_weather['Date'] = merged_weather['Date'].dt.strftime('%Y-%m-%d')
         
-        merged_weather.to_csv('All_weather_data.csv', index = False, encoding='windows-1252')
+        merged_weather.to_csv('Data/All_weather_data.csv', index = False, encoding='windows-1252')
 
     def merge_and_process_data(self, weather_data_path, value_data_path, output_file_path):
         """

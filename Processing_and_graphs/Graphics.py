@@ -43,7 +43,7 @@ class Visualisator(object):
         A plot displaying the relationship between temperature and the downloaded data from API with highlighted days.  
         """
         # Loading the merged file
-        file_path = 'final_data.csv'
+        file_path = 'Data/final_data.csv'
         df = pd.read_csv(file_path)
         
         #making sure that the Date variable is in Datetime format
@@ -92,7 +92,7 @@ class Visualisator(object):
         Subplots displaying the relationship between temperature and the downloaded data from API with highlighted days.  
         """
         # Loading the merged file
-        file_path = 'final_data.csv'
+        file_path = 'Data/final_data.csv'
         df = pd.read_csv(file_path)
 
         # Making sure that the Date variable is in Datetime format

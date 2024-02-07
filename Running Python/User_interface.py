@@ -1,5 +1,8 @@
 # User Interface
 
+# Example first input:
+   # "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
+
 # pip install customtkinter
 import customtkinter
 import tkinter
@@ -45,18 +48,18 @@ else:
     print("No directory path was set.")
 
 
-# "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
+
 new_directory = directory_path
 #new_directory = "c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs"
 
 # Changing the current working directory
 os.chdir(new_directory)
 
-from Searching_diff import searching_difference_diff
-from Searching_normal import searching_difference_normal
-from Data_preparation import Data_prep
-from Electricity_API_download_data_latest import DownloadAPI
-from Graphics import Visualisator
+from Processing_and_graphs.Searching_diff import searching_difference_diff
+from Processing_and_graphs.Searching_normal import searching_difference_normal
+from Processing_and_graphs.Data_preparation import Data_prep
+from Processing_and_graphs.Electricity_API_download_data_latest import DownloadAPI
+from Processing_and_graphs.Graphics import Visualisator
 
 from deutschland import smard
 from deutschland.smard import Configuration
@@ -76,13 +79,13 @@ customtkinter.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark",
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 # Don't touch, seting default
-final_data = 'final_data.csv'
-weather_new = 'Weather_new.csv'
-weather_base = "Weather_base.xlsx"
+final_data = 'Data/final_data.csv'
+weather_new = 'Data/Weather_new.csv'
+weather_base = 'Data/Weather_base.xlsx'
 
-weather_data_path = 'All_weather_data.csv'
-value_data_path = 'API_values.csv'
-output_file_path = "final_data.csv"
+weather_data_path = 'Data/All_weather_data.csv'
+value_data_path = 'Data/API_values.csv'
+output_file_path = 'Data/final_data.csv'
 
 input_row = []
 
@@ -110,7 +113,7 @@ def retrieve_input():
         return
     #downloading the data 
     API_values = download_api.download_chart_data_by_name(filter_word= energy_source, filter_word_copy=energy_source, region="DE", region_copy="DE")
-    API_values.to_csv('API_values.csv', index = False, encoding='windows-1252')
+    API_values.to_csv('Data/API_values.csv', index = False, encoding='windows-1252')
     #API_values.to_csv('c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs/API_values', index = False, encoding='windows-1252')
 
     ##2.step - preparing and merging weather data 
@@ -168,6 +171,7 @@ def retrieve_input():
     else:
         print("Invalid type of graph selected.")
         return
+    root.destroy()
 
 
 root = customtkinter.CTk()
