@@ -248,7 +248,7 @@ entry_7.pack(pady=0.5, padx=5)
 entry_7.configure(font=font_style)
 
 # For the threshold 
-label_entry_thre = customtkinter.CTkLabel(master=frame, text="Threshold:")
+label_entry_thre = customtkinter.CTkLabel(master=frame, text="Threshold (integer between 5-10):")
 label_entry_thre.pack(pady=(0,0), padx=5)
 label_entry_thre.configure(font=font_style)
 entry_threshold = customtkinter.CTkEntry(master=frame, textvariable= entry_var_threshold)
