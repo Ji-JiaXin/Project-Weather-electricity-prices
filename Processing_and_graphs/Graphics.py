@@ -1,16 +1,8 @@
 #importing necessary packages
-import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 import matplotlib.dates as mdates
-
-# Path to the new working directory
-#new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
-#new_directory = "C:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs"
-
-# Change the current working directory
-#os.chdir(new_directory)
 
 # Graph
 class Visualisator(object):
@@ -143,14 +135,3 @@ class Visualisator(object):
                 plt.tight_layout()
                 plt.savefig(f'year_graph_{year}.png')
                 plt.show()
-
-
-
-
-
-# Call the function to get similar dates
-#similar_periods = searching_difference_diff(input_temperatures, final_data, threshold)
-#similar_periods = searching_difference_normal(input_temperatures, final_data, threshold)
-
-#Visualisator.graph_creator_year(similar_periods)
-#Visualisator.graph_creator_one_period(similar_periods)

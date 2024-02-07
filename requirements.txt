@@ -3,3 +3,6 @@ pandas
 numpy
 os
 customtkinter
+matplotlib.pyplot
+datetime
+matplotlib.date

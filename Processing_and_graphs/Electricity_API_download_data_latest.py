@@ -1,12 +1,7 @@
-# start by downloading the package
-# pip install deutschland
-# poetry add deutschland -E smard
 
-#import package
+#import packages
 from deutschland import smard
-
 import pandas as pd
-
 from deutschland.smard import Configuration
 from deutschland.smard.api_client import ApiClient
 from deutschland.smard.api_client import Endpoint as _Endpoint
@@ -229,6 +224,7 @@ class DownloadAPI(object):
             resolution(str) - resolution of the data, defaultly as "hour"   
                 `hour` - Hourly, `quarterhour` - Quarterhourly, `day` - Daily, `weekly` - Weekly, `monthly` - Monthly, `yearly` - Yearly
             **kwargs
+
         Keyword Args:
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
@@ -286,11 +282,11 @@ class DownloadAPI(object):
     def chart_data_timestamps(self, filter, region, resolution, **kwargs):
         """
         Returns available timestamps based on the combination of filter, region and resolution. 
-        Parametrs same as in 'chart_data_API_request()'
 
+        Parametrs same as in 'chart_data_API_request()'
+        
         Returns:
             Indices
-                If the method is called asynchronously, returns the request thread.
         """
         kwargs["async_req"] = kwargs.get("async_req", False)
         kwargs["_return_http_data_only"] = kwargs.get("_return_http_data_only", True)
@@ -365,7 +361,7 @@ class DownloadAPI(object):
             print("Something went wrong while downloading or processing the data into Pandas Dataframe. Please check your previous steps.")
             print(e)
             return None
-        
+    # creating a dictionary with names - so we can download data without searching for the number    
     dictionary_filters = {
         'el_gen_brown_coal':1223, 'el_gen_nuclear_energy':1224, 'generation off shore wind':1225,
         'el_gen_hydropower':1226, 'generation from other convential sources':1227,
@@ -407,28 +403,5 @@ class DownloadAPI(object):
             print(f"Typo in filter name -> unknown filter: {filter_word}")
             return None
         return self.download_chart_data(filter_num, filter_num_copy,region, region_copy, timestamp=None, resolution="day" , **kwargs)
-
-    
-
-#config = Configuration(host="https://www.smard.de/app", discard_unknown_keys=True)
-#api_client = ApiClient(config)
-#download_api = DownloadAPI(api_client)
-
-#downloading example data 
-#Elect_gen_onshore_wind = download_api.download_chart_data(filter=4067, filter_copy=4067,region="DE", region_copy="DE")
-#print(Elect_gen_onshore_wind)
-
-#API_values = download_api.download_chart_data_by_name(filter_word="Generation from photovoltaics", filter_word_copy="Generation from photovoltaics", region="DE", region_copy="DE")
-#API_values.to_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/API_values.csv', index = False, encoding='windows-1252')
-#print(API_values)
-
-# Variables of interest:
-# 1125: Generation off shore wind
-# 1127: Generation from other convential sources
-# 1128: Generation from other renewables
-# 4067: Generation on shore wind
-# 4068: Generation from photovoltaics
-# 4070: Generation from pumper storage
-# 410: Total electricity consumption
 
 

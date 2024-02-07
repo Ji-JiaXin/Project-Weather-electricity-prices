@@ -1,12 +1,4 @@
 import pandas as pd
-import os
-
-# Path to the new working directory
-#new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
-#new_directory = "c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs"
-
-# Changing the current working directory
-#os.chdir(new_directory)
 
 class Data_prep(object):
     
@@ -83,9 +75,9 @@ class Data_prep(object):
         Merging two files "All_weather_data.csv" with "value.csv", removing duplicates, renaming columns and saving into csv format.
 
         Parameters:
-        - weather_data_path (str): File path to the weather data file.
-        - value_data_path (str): File path to the value data file.
-        - output_file_path (str): File path to save the merged data.
+            weather_data_path (str): File path to the weather data file.
+            value_data_path (str): File path to the value data file.
+            output_file_path (str): File path to save the merged data.
 
         Returns:
         None. Creates a CSV file with three columns - date, temperature, value. 
@@ -108,15 +100,5 @@ class Data_prep(object):
         # Saving the merged data to a new file
         merged_data.to_csv(output_file_path, index=False)
 
-#weather_base = "Weather_base.xlsx"
-#weather_new = 'Weather_new.csv'
 
-#weather_data_path = 'All_weather_data.csv'
-#value_data_path = 'API_values.csv'
-#output_file_path = "final_data.csv"
-
-#Data_prep().process_and_merge_weather_data(weather_base, weather_new)
-
-
-#Data_prep().merge_and_process_data(weather_data_path, value_data_path, output_file_path)
         
