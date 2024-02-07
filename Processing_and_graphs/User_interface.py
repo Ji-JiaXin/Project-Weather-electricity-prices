@@ -7,10 +7,11 @@ import pandas as pd
 import sys
 import os
 
-sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices")
-#sys.path.append("c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices")
+#sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices")
+sys.path.append("c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices")
 
-new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
+#new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
+new_directory = "c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs"
 
 # Changing the current working directory
 os.chdir(new_directory)
@@ -134,14 +135,14 @@ def retrieve_input():
 
 
 root = customtkinter.CTk()
-root.geometry("500x680")
+root.geometry("600x680")
 
 
 frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
-label = customtkinter.CTkLabel(master=frame, text = "Please insert seven temperature values in Celsius and the threshold value")
-label.pack(pady=20, padx=20)
+label_1 = customtkinter.CTkLabel(master=frame, text = "Please insert seven temperature values in Celsius and the threshold value")
+label_1.pack(pady=20, padx=20)
 
 entry_var_1 = tkinter.StringVar()
 entry_var_2 = tkinter.StringVar()
