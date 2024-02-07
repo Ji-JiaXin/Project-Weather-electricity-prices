@@ -8,7 +8,7 @@ Join us on this exciting journey, and let us explore together the impact of weat
 The authors: Dan Sedláček, Ji Jia Xin (Alena)
 
 ## How to run the project on your device?
-1. Have installed Git on your device. You can download it using the following link: https://git-scm.com/downloads. 
+1. Have installed Git on your device. You can download it using the following link: https://git-scm.com/downloads. Also, have Python installed. 
 
 2. Start by cloning the project repository on your machine. Open command prompt or terminal (press the windows button on your keyboard and search for "terminal" or use "command + t" for macOS). Set your desired current working directory using the following command (replace "file_path" with your path in a similar form as "C:/Users/mypersonal/Desktop...", CAREFUL if you copy that directly from your File Explorer, you need to rewrite the backslashes "\" to "/"):
 <pre>

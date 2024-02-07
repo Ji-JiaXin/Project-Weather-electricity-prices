@@ -1,7 +1,6 @@
 deutschland
 pandas
 numpy
-os
 customtkinter
 matplotlib.pyplot
 datetime
