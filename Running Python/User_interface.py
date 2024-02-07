@@ -175,14 +175,14 @@ def retrieve_input():
 
 
 root = customtkinter.CTk()
-root.geometry("600x680")
+root.geometry("700x780")
 
 
 frame = customtkinter.CTkFrame(master=root)
-frame.pack(pady=20, padx=60, fill="both", expand=True)
+frame.pack(pady=5, padx=60, fill="both", expand=True)
 
 label_1 = customtkinter.CTkLabel(master=frame, text = "Please insert seven temperature values in Celsius and the threshold value")
-label_1.pack(pady=20, padx=20)
+label_1.pack(pady=10, padx=20)
 
 entry_var_1 = tkinter.StringVar()
 entry_var_2 = tkinter.StringVar()
@@ -193,29 +193,51 @@ entry_var_6 = tkinter.StringVar()
 entry_var_7 = tkinter.StringVar()
 entry_var_threshold = tkinter.StringVar()
 
+label_entry_1 = customtkinter.CTkLabel(master=frame, text="1st temperature (°C):")
+label_entry_1.pack(pady=(1,0), padx=10)
 entry_1 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_1)
-entry_1.pack(pady=10, padx=10)
+entry_1.pack(pady=3, padx=10)
 
+label_entry_2 = customtkinter.CTkLabel(master=frame, text="2nd temperature (°C):")
+label_entry_2.pack(pady=(1,0), padx=10)
 entry_2 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_2)
-entry_2.pack(pady=10, padx=10)
+entry_2.pack(pady=3, padx=10)
 
+
+label_entry_3 = customtkinter.CTkLabel(master=frame, text="3rd temperature (°C):")
+label_entry_3.pack(pady=(1,0), padx=10)
 entry_3 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_3)
-entry_3.pack(pady=10, padx=10)
+entry_3.pack(pady=3, padx=10)
 
+
+label_entry_4 = customtkinter.CTkLabel(master=frame, text="4st temperature (°C):")
+label_entry_4.pack(pady=(1,0), padx=10)
 entry_4 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_4)
-entry_4.pack(pady=10, padx=10)
+entry_4.pack(pady=3, padx=10)
 
+
+label_entry_5 = customtkinter.CTkLabel(master=frame, text="5st temperature (°C):")
+label_entry_5.pack(pady=(1,0), padx=10)
 entry_5 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_5)
-entry_5.pack(pady=10, padx=10)
+entry_5.pack(pady=3, padx=10)
 
+
+label_entry_6 = customtkinter.CTkLabel(master=frame, text="6st temperature (°C):")
+label_entry_6.pack(pady=(1,0), padx=10)
 entry_6 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_6)
-entry_6.pack(pady=10, padx=10)
+entry_6.pack(pady=3, padx=10)
 
+
+label_entry_7 = customtkinter.CTkLabel(master=frame, text="7st temperature (°C):")
+label_entry_7.pack(pady=(1,0), padx=10)
 entry_7 = customtkinter.CTkEntry(master=frame, textvariable= entry_var_7)
-entry_7.pack(pady=10, padx=10)
+entry_7.pack(pady=3, padx=10)
 
+
+label_entry_thre = customtkinter.CTkLabel(master=frame, text="Threshold:")
+label_entry_thre.pack(pady=(3,0), padx=10)
 entry_threshold = customtkinter.CTkEntry(master=frame, textvariable= entry_var_threshold)
-entry_threshold.pack(pady=10, padx=10)
+entry_threshold.pack(pady=5, padx=10)
 
 
 optionmenu_1 = customtkinter.CTkOptionMenu(frame, values=["Generation off shore wind", 
