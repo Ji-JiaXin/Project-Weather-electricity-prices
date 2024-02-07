@@ -10,6 +10,14 @@ def searching_difference_diff(input_temperatures, final_data, threshold):
     Function takes the data from input, computes the first difference of input values, 
     searches the dataset and finds time periods with similar temperature differences.
     You can adjust the threshold for setting the similarity, too.
+
+    Parameters:
+        input_temperatures - temperature values that user insert 
+        final_data - the final data which includes weather values and also values downloaded from API 
+        threshold - the level of similarity that user allows  
+    
+    Returns:
+        Similar periods based on the inserted temperature values. 
     """
     if len(input_temperatures) != 7:
         # Pactically not necessary, just to be sure

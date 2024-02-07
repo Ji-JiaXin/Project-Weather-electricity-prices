@@ -6,3 +6,5 @@ customtkinter
 matplotlib.pyplot
 datetime
 matplotlib.date
+tkinter
+tkinter.font

@@ -6,9 +6,15 @@ import numpy as np
 
 def searching_difference_normal(input_temperatures, final_data, threshold):
     """
-    Function takes the data from input, search whole dataset
-      and find time periods with similar temperatures.
-      You can adjust the threshold for setting the similarity, too.
+    Function takes the data from input, search whole dataset and find time periods with similar temperatures.
+    You can adjust the threshold for setting the similarity, too.
+    Parameters:
+        input_temperatures - temperature values that user insert 
+        final_data - the final data which includes weather values and also values downloaded from API 
+        threshold - the level of similarity that user allows  
+    
+    Returns:
+        Similar periods based on the inserted temperature values. 
     """
     if len(input_temperatures) != 7:
         raise ValueError("Input temperatures must be a list of 7 numbers.")

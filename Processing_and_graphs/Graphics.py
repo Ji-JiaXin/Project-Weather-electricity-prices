@@ -10,18 +10,15 @@ class Visualisator(object):
     The class includes functions for visualisation of the relationship between the values and temperature taken from the "final_data.csv". 
     ....
     Attributes
-    ----------
-    None
-    ....
+        None
 
     Methods
-    ----------
-    graph_creator_one_period(similar_periods):
-        Creating a graph covering the whole time period of the data. Uses the "final_data.csv", creates a plot describing the envolvement of temperature and values over time.
-        It also highlights dates with similar weather pattern. 
-    
-    graph_creator_year(similar_periods):
-        Creating a series of subplots in a 3x4 grid, each representing a certain year. Similarly to previous method, it plots the temperature and values over time and highlights dates with similar patterns. 
+        graph_creator_one_period(similar_periods):
+            Creating a graph covering the whole time period of the data. Uses the "final_data.csv", creates a plot describing the envolvement of temperature and values over time.
+            It also highlights dates with similar weather pattern. 
+        
+        graph_creator_year(similar_periods):
+            Creating a series of subplots in a 3x4 grid, each representing a certain year. Similarly to previous method, it plots the temperature and values over time and highlights dates with similar patterns. 
     """
     def graph_creator_one_period(similar_periods):
         """
@@ -70,8 +67,6 @@ class Visualisator(object):
         plt.show()
 
     
-    
-
     def graph_creator_year(similar_periods):
         """
         Loading of the final_data.csv and creating subplots only for the years where similar_periods are found.

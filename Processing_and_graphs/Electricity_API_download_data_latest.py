@@ -19,65 +19,63 @@ class DownloadAPI(object):
     The first part of the code was inspired by github repository https://github.com/bundesAPI/smard-api/tree/main. Changes were made to make the code work for our project. 
     ....
     Attributes
-    ----------
-    api_client 
-        It is part of ApiClient class from deutschlad.smard library, it enables the API. 
+        api_client 
+            It is part of ApiClient class from deutschlad.smard library, it enables the API. 
     
-    chart_data_chart_data_API_request_endpoint
-        Used to make requests to API endpoint in order to get specific time series data. 
-        It is a part of "_Endpoint" class from deutschland.smard library.       
+        chart_data_chart_data_API_request_endpoint
+            Used to make requests to API endpoint in order to get specific time series data. 
+            It is a part of "_Endpoint" class from deutschland.smard library.       
     ....
     Methods
-    ----------
-    def __init__()
-        It initializes the class. In case that api_client is not provided it creates ApiClient by default. 
+        def __init__()
+            It initializes the class. In case that api_client is not provided it creates ApiClient by default. 
     
-    def chart_data_API_request()
-        It makes API request based on the specified endpoint, filters, regions and timestamps.
-        Parameters:
-            filter(int)
-            filter_copy(int) - same as filter(), it must be filled due to wrong API design from creators
-            region(str) - defaultly set as DE
-            region_copy(str) - same as region(), it must be filled due to wrong API design from creators
-            timestamp(integer)
-            resolution(str)
-            **kwargs
+    ` def chart_data_API_request()
+            It makes API request based on the specified endpoint, filters, regions and timestamps.
+            Parameters:
+                filter(int)
+                filter_copy(int) - same as filter(), it must be filled due to wrong API design from creators
+                region(str) - defaultly set as DE
+                region_copy(str) - same as region(), it must be filled due to wrong API design from creators
+                timestamp(integer)
+                resolution(str)
+                **kwargs
 
-    def chart_data_timestamps()
-        Returns available timestamps based on the combination of filter, region and resolution.         
-        Parameters:
-            filter(int)
-            region(str) - defaultly set as DE
-            timestamp(integer)
-            resolution(str)
-            **kwargs
+        def chart_data_timestamps()
+            Returns available timestamps based on the combination of filter, region and resolution.         
+            Parameters:
+                filter(int)
+                region(str) - defaultly set as DE
+                timestamp(integer)
+                resolution(str)
+                **kwargs
 
-    def download_chart_data()
-        Downloads the data and returns it as a Pandas DataFrame. It also converts the timestamp column into normal date. 
-        Parameters:
-            Same as for the method chart_data_API_request(). 
+        def download_chart_data()
+            Downloads the data and returns it as a Pandas DataFrame. It also converts the timestamp column into normal date. 
+            Parameters:
+                Same as for the method chart_data_API_request(). 
 
-    def simplifier_filter():
-        Getting the filter number based on insert name.
-        Parameters: 
-            filter_word(str)
-        
-    def simplifier_filter_copy():
-        Getting the filter_copy number based on inserted filter name.
-        Parameters: 
-            filter_word_copy(str)
+        def simplifier_filter():
+            Getting the filter number based on insert name.
+            Parameters: 
+                filter_word(str)
+            
+        def simplifier_filter_copy():
+            Getting the filter_copy number based on inserted filter name.
+            Parameters: 
+                filter_word_copy(str)
 
-    def download_chart_data_by_name()
-        Calls both simplifiers and connects it with download_chart_data function, making the whole process more user friendly. 
-        One must be careful while typing the name of the filter, it must match with keys in the dictionary_filters. 
-        Parameters: 
-            filter_word(str) 
-            filter_word_copy(str)
-            region(str), 
-            region_copy(str),
-            timestamp(int)
-            resolution(str) 
-            **kwargs    
+        def download_chart_data_by_name()
+            Calls both simplifiers and connects it with download_chart_data function, making the whole process more user friendly. 
+            One must be careful while typing the name of the filter, it must match with keys in the dictionary_filters. 
+            Parameters: 
+                filter_word(str) 
+                filter_word_copy(str)
+                region(str), 
+                region_copy(str),
+                timestamp(int)
+                resolution(str) 
+                **kwargs    
     """
     def __init__(self, api_client=None):
         """
@@ -353,7 +351,7 @@ class DownloadAPI(object):
             del final_df_clean['date']
                 #4 Convert the 'timestamp' column to datetime and extract date part only 
             final_df_clean['timestamp'] = pd.to_datetime(final_df_clean['timestamp']).dt.date
-                #6 Renaming the columns
+                #5 Renaming the columns
             final_df_clean.rename(columns={'timestamp': 'Date', 'value': 'Values'}, inplace=True)
 
             return final_df_clean
@@ -380,12 +378,22 @@ class DownloadAPI(object):
     def simplifier_filter(self,filter_word):
         """
         Getting the filter number based on insert name.
+        Parameters:
+            filter_word - the filter name from predefined dictionary
+        
+        Returns:
+            The number based on the key from dictionary
         """
         return self.dictionary_filters.get(filter_word.lower().strip())
 
     def simplifier_filter_copy(self,filter_word_copy):
         """
         Getting the filter_copy number based on inserted filter name.
+        Parameters:
+            filter_word_copy - the filter name from predefined dictionary
+
+        Returns:
+            The number based on the key from dictionary
         """
         return self.dictionary_filters.get(filter_word_copy.lower().strip())
 

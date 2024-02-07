@@ -37,6 +37,7 @@ pip install -r requirements.txt
 We have created a simple modern-looking graphical user interface (GUI) for your simplicity and comfortability. At the beginning, you will be asked to provide us with a directory where you have downloaded our repository (It should be something similar to: "C:\Users\Jakub\Desktop\Project-Weather-electricity-prices"). Then a new pop-up window will show up, where you will be asked to insert the 7 temperatures in °c, set the threshold, choose the preferred variable you want to examine, the method you want to use, and lastly, the type of visualization you are interested in. 
 
 By clicking the "Find" button the MAGIC happens. You should be provided with a graphical visualization of the relationship between your chosen variable and the temperature development over time. Furthermore, based on your inserted temperatures and the threshold, you can see highlighted periods in the graph which are the periods with similar weather temperature patterns as your inserted values. 
+Note: If you choose to generate graph for each year and NO graph pops out after you inserted temperature values, it might be the case that no similar periods were found. (Please, read the output message in your terminal for further details.)
 
 From the graph, you can further conclude, whether your chosen variable has a similar trend to weather temperature. That is pretty cool, right?
 
@@ -58,6 +59,6 @@ Based on the previous analysis we provide a graphical visualization for you, as 
 ## Final words
 We tried our best to offer you a module that would provide you with interesting insights into the relationship between weather temperature and your chosen electricity-related variable. However, due to data restrictions and other factors, we were not able to ensure the quality of our weather data. Additionally, we tried to cover all possible errors that may arise from invalid user input, but there might still be some that we have missed. Lastly, we would be delighted for your comments, feedback and pull requests that will allow us to make the module work better and smoother! Thank you and have fun! 
 
-Dan & Alena
-
+Dan S. & Alena J.
+ 
 
