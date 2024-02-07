@@ -2,8 +2,4 @@ deutschland
 pandas
 numpy
 customtkinter
-matplotlib.pyplot
-datetime
-matplotlib.date
-tkinter
-tkinter.font
+matplotlib
