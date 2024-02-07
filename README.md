@@ -3,7 +3,9 @@ Welcome to our Python project for “Data Processing in Python” (JEM207) aimed
 
 The ultimate goal is to provide the user with information regarding the development of the monitored indicator during the past periods with similar weather conditions. 
 
-Join us on this exciting journey, and let us explore together the impact of weather on electricity flow within the German energy system!
+Join us on this exciting journey, and let us explore together the impact of weather on electricity flow within the German energy system! 
+
+The authors: Dan Sedláček, Ji Jia Xin (Alena)
 
 ## How to run the project on your device?
 1. Have installed Git on your device. You can download it using the following link: https://git-scm.com/downloads. 
@@ -54,6 +56,8 @@ The method "Differentiated" calculates the first difference of the values and ma
 Based on the previous analysis we provide a graphical visualization for you, as sometimes a nice graphical visualization is worth more than a thousand words. There are two types of graphs you can choose from - either a graph covering the whole period or a set of more detailed subgraphs displaying each yearly development. The output dates from the model for finding similar weather patterns are also incorporated in the graph (highlighted in red).  
 
 ## Final words
-We tried our best to offer you a module that would provide you with interesting insights into the relationship between weather temperature and your chosen electricity-related variable. However, due to data restrictions and other factors, we were not able to ensure the quality of our weather data. Additionally, we tried to cover all possible errors that may arise from invalid user input, but there might still be some that we have missed. Lastly, we would be delighted for your comments, feedback and pull requests that will allow us to make the module work better and smoother! Thank you and have fun!
+We tried our best to offer you a module that would provide you with interesting insights into the relationship between weather temperature and your chosen electricity-related variable. However, due to data restrictions and other factors, we were not able to ensure the quality of our weather data. Additionally, we tried to cover all possible errors that may arise from invalid user input, but there might still be some that we have missed. Lastly, we would be delighted for your comments, feedback and pull requests that will allow us to make the module work better and smoother! Thank you and have fun! 
+
+Dan & Alena
 
 
