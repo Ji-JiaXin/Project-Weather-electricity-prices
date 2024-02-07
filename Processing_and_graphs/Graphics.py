@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
+import matplotlib.dates as mdates
 
 # Path to the new working directory
 #new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
@@ -73,13 +74,17 @@ class Visualisator(object):
         plt.title('Relationship between Temperature and Values')
 
         # Displaying the plot
+        plt.savefig(f'whole_period.png')
         plt.show()
+
+    
+    
 
     def graph_creator_year(similar_periods):
         """
-        Loading of the final_data.csv, creating subplots into a grid 3x4 with a use of for loop. 
-        Highlighting the dates with similar weather patterns (the output from searching_first_diff.py or searching_sqr_diff.py).
-    
+        Loading of the final_data.csv and creating subplots only for the years where similar_periods are found.
+        Each set of graphs will be saved as a separate image only if similar_periods are present in that year.
+        
         Parameters:
             similar_periods - A set of dates from searching_first_diff.py or searching_sqr_diff.py
         
@@ -96,48 +101,51 @@ class Visualisator(object):
         # Get years from our data frame
         years = df['Date'].dt.year.unique()
 
-        # Create smaller plots for each year - we create a grid 3x4
-        fig, axes_years= plt.subplots(nrows=3, ncols=4, figsize=(9, 9), sharey=True)
+        for year in years:
+            # Check if there are similar periods in this year
+            if any(pd.to_datetime(similar_period['Date']).dt.year.eq(year).any() for similar_period in similar_periods):
+                fig, ax = plt.subplots(figsize=(10, 5))
+                
+                # Plotting the values downloaded from API
+                df_year = df[df['Date'].dt.year == year]
+                ax.plot(df_year['Date'], df_year['Values'], label=f'Year {year}', color='darkblue')
+                ax.set_title(f'Year {year}')
+                ax.set_xticks([])
+                ax.set_ylabel('Values', color='darkblue', fontsize=8)
 
-        # Plot each year separately
-        axes_years = axes_years.flatten()
-        # Using for loop to iterate 
-        for n, year in enumerate(years):
-            # plotting the values downloaded from API 
-            df_year = df[df['Date'].dt.year == year]
-            axes_years[n].plot(df_year['Date'], df_year['Values'], label=f'Year {year}',color='darkblue')
-            axes_years[n].set_title(f'Year {year}')
-            axes_years[n].set_xticks([])
-            axes_years[n].set_ylabel('Values',color='darkblue',fontsize=5)
+                # Format the dates on the x-axis
+                ax.xaxis_date()  
+                ax.xaxis.set_major_locator(mdates.MonthLocator())  
+                ax.xaxis.set_major_formatter(mdates.DateFormatter('%b'))  
+                ax.xaxis.set_minor_locator(mdates.DayLocator())  
+                fig.autofmt_xdate()  
 
-            # adding temperature variable 
-            axes_temp = axes_years[n].twinx()
-            axes_temp.plot(df_year['Date'], df_year['Temperature'], label='Temperature', color='green')
-            axes_temp.set_ylabel('Temperature', color='green',fontsize=5)
+                # Adding temperature variable
+                ax_temp = ax.twinx()
+                ax_temp.plot(df_year['Date'], df_year['Temperature'], label='Temperature', color='green')
+                ax_temp.set_ylabel('Temperature', color='green', fontsize=8)
 
-            # setting tick parameters 
-            axes_years[n].tick_params(axis='x', labelsize=5)
-            axes_years[n].tick_params(axis='y', labelsize=5)
-            axes_temp.tick_params(axis='y', labelsize=5)
+                # Setting tick parameters
+                ax.tick_params(axis='x', labelsize=6)
+                ax.tick_params(axis='y', labelsize=6)
+                ax_temp.tick_params(axis='y', labelsize=6)
 
-            #iterating trough the dataset searching if the date is there and then putting a dotted line in the graph
-            similar_periods_str = similar_periods.copy()  # Create a copy as we do not want to modify our original data
-            for similar_period_df in similar_periods_str: 
-                #we need to reshape the Date column into string, using lambda function (only if the Date is datetime.datetime otherwise do nothing)
-                #also we need to use .loc to avoid setting with copy warning
-                similar_period_df.loc[:,'Date'] = similar_period_df['Date'].apply(lambda x: x.strftime('%Y-%m-%d') if isinstance(x, datetime.datetime) else x)
+                # Highlighting similar periods
+                for similar_period_df in similar_periods:
+                    similar_period_df['Date'] = similar_period_df['Date'].apply(
+                        lambda x: x.strftime('%Y-%m-%d') if isinstance(x, datetime.datetime) else x
+                    )
+                    for day in similar_period_df['Date']:
+                        if day in df_year['Date'].astype(str).values:
+                            ax.axvline(pd.to_datetime(day), color='red', linestyle=':', linewidth=1)
 
-                # Highlight specific dates by iterating through the dataset and checking if the date is in df_year
-            for similar_period_df in similar_periods_str:
-                for day in similar_period_df['Date']:
-                    if day in df_year['Date'].astype(str).values:
-                        axes_years[n].axvline(pd.to_datetime(day), color='red', linestyle=':', linewidth=1)
+                # Adjust layout for each figure and save
+                plt.tight_layout()
+                plt.savefig(f'year_graph_{year}.png')
+                plt.show()
 
-        # Final touches - adjusting layout and title 
-        fig.tight_layout()
 
-        # printing the plot
-        plt.show()
+
 
 
 # Call the function to get similar dates

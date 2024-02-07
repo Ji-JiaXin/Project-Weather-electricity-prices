@@ -10,6 +10,11 @@ import os
 sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices")
 #sys.path.append("c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices")
 
+new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
+
+# Changing the current working directory
+os.chdir(new_directory)
+
 from Processing_and_graphs.Searching_diff import searching_difference_diff
 from Processing_and_graphs.Searching_normal import searching_difference_normal
 from Processing_and_graphs.Data_preparation import Data_prep
@@ -32,13 +37,8 @@ customtkinter.set_ctk_parent_class(tkinter.Tk)
 
 customtkinter.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
-new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
 
-# Changing the current working directory
-os.chdir(new_directory)
-
-
-# Choose your path
+# Don't touch, seting default
 final_data = 'final_data.csv'
 weather_new = 'Weather_new.csv'
 weather_base = "Weather_base.xlsx"
@@ -73,7 +73,7 @@ def retrieve_input():
         return
     #downloading the data 
     API_values = download_api.download_chart_data_by_name(filter_word= energy_source, filter_word_copy=energy_source, region="DE", region_copy="DE")
-    API_values.to_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/API_values.csv', index = False, encoding='windows-1252')
+    API_values.to_csv('/API_values.csv', index = False, encoding='windows-1252')
     #API_values.to_csv('c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs/API_values', index = False, encoding='windows-1252')
 
     ##2.step - preparing and merging weather data 
