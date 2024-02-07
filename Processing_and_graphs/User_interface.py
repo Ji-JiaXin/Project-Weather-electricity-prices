@@ -7,20 +7,56 @@ import pandas as pd
 import sys
 import os
 
-#sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices")
-sys.path.append("c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices")
+def on_set():
+    global directory_path
+    directory_path = entry.get().strip('\"')
+    app.destroy()
 
-#new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
-new_directory = "c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs"
+# Set the theme and scaling before creating the main window
+customtkinter.set_appearance_mode("dark")  # Other options: "Dark", "Light"
+customtkinter.set_default_color_theme("blue")  # Other options like "dark-blue", "green"
+
+# Create the main window
+app = customtkinter.CTk()
+app.geometry('400x300')
+app.title("Set Working Directory")
+
+# Create a label with your chosen text
+label_text = """Please enter your working directory,
+where you have downloaded our GitHub repository.
+Then press the Set buttom and the working directory
+will be set for further usage."""
+label = customtkinter.CTkLabel(app, text=label_text)
+label.pack(pady=10)
+
+entry = customtkinter.CTkEntry(app)
+entry.pack(pady=10)
+
+set_button = customtkinter.CTkButton(app, text="Set", command=on_set)
+set_button.pack(pady=10)
+
+
+app.mainloop()
+
+if directory_path:  # Check if directory_path was set
+    sys.path.append(directory_path)
+    print(f"Directory path {directory_path} added to sys.path")
+else:
+    print("No directory path was set.")
+
+
+# "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
+new_directory = directory_path
+#new_directory = "c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs"
 
 # Changing the current working directory
 os.chdir(new_directory)
 
-from Processing_and_graphs.Searching_diff import searching_difference_diff
-from Processing_and_graphs.Searching_normal import searching_difference_normal
-from Processing_and_graphs.Data_preparation import Data_prep
-from Processing_and_graphs.Electricity_API_download_data_latest import DownloadAPI
-from Processing_and_graphs.Graphics import Visualisator
+from Searching_diff import searching_difference_diff
+from Searching_normal import searching_difference_normal
+from Data_preparation import Data_prep
+from Electricity_API_download_data_latest import DownloadAPI
+from Graphics import Visualisator
 
 from deutschland import smard
 from deutschland.smard import Configuration
@@ -74,7 +110,7 @@ def retrieve_input():
         return
     #downloading the data 
     API_values = download_api.download_chart_data_by_name(filter_word= energy_source, filter_word_copy=energy_source, region="DE", region_copy="DE")
-    API_values.to_csv('/API_values.csv', index = False, encoding='windows-1252')
+    API_values.to_csv('API_values.csv', index = False, encoding='windows-1252')
     #API_values.to_csv('c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs/API_values', index = False, encoding='windows-1252')
 
     ##2.step - preparing and merging weather data 
