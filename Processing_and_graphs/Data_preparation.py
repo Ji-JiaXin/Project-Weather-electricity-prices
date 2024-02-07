@@ -3,10 +3,10 @@ import os
 
 # Path to the new working directory
 #new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
-new_directory = "c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs"
+#new_directory = "c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs"
 
 # Changing the current working directory
-os.chdir(new_directory)
+#os.chdir(new_directory)
 
 class Data_prep(object):
     
@@ -112,7 +112,7 @@ class Data_prep(object):
 #weather_new = 'Weather_new.csv'
 
 #weather_data_path = 'All_weather_data.csv'
-#value_data_path = 'Value.csv'
+#value_data_path = 'API_values.csv'
 #output_file_path = "final_data.csv"
 
 #Data_prep().process_and_merge_weather_data(weather_base, weather_new)

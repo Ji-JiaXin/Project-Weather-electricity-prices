@@ -5,9 +5,10 @@ import customtkinter
 import tkinter
 import pandas as pd
 import sys
+import os
 
-#sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices")
-sys.path.append("c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices")
+sys.path.append("C:/Users/Sedláček/pr/Project-Weather-electricity-prices")
+#sys.path.append("c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices")
 
 from Processing_and_graphs.Searching_diff import searching_difference_diff
 from Processing_and_graphs.Searching_normal import searching_difference_normal
@@ -22,24 +23,25 @@ from deutschland.smard.api_client import Endpoint as _Endpoint
 from deutschland.smard.model.indices import Indices
 from deutschland.smard.model.time_series import TimeSeries
 
-
 config = Configuration(host="https://www.smard.de/app", discard_unknown_keys=True)
 api_client = ApiClient(config)
 download_api = DownloadAPI(api_client)
-
 
 #GUI
 customtkinter.set_ctk_parent_class(tkinter.Tk)
 
 customtkinter.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
+new_directory = "C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs"
+
+# Changing the current working directory
+os.chdir(new_directory)
+
 
 # Choose your path
-#final_data = pd.read_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/final_data.csv')
-final_data = pd.read_csv('c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs/final_data.csv')
-
-weather_base = "Weather_base.xlsx"
+final_data = 'final_data.csv'
 weather_new = 'Weather_new.csv'
+weather_base = "Weather_base.xlsx"
 
 weather_data_path = 'All_weather_data.csv'
 value_data_path = 'API_values.csv'
@@ -71,8 +73,8 @@ def retrieve_input():
         return
     #downloading the data 
     API_values = download_api.download_chart_data_by_name(filter_word= energy_source, filter_word_copy=energy_source, region="DE", region_copy="DE")
-    #API_values.to_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/API_values.csv', index = False, encoding='windows-1252')
-    API_values.to_csv('c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs/API_values', index = False, encoding='windows-1252')
+    API_values.to_csv('C:/Users/Sedláček/pr/Project-Weather-electricity-prices/Processing_and_graphs/API_values.csv', index = False, encoding='windows-1252')
+    #API_values.to_csv('c:/Users/jijia/OneDrive/Desktop/Project_ python/Project-Weather-electricity-prices/Processing_and_graphs/API_values', index = False, encoding='windows-1252')
 
     ##2.step - preparing and merging weather data 
     data_preparer = Data_prep()
@@ -132,7 +134,7 @@ def retrieve_input():
 
 
 root = customtkinter.CTk()
-root.geometry("400x680")
+root.geometry("500x680")
 
 
 frame = customtkinter.CTkFrame(master=root)

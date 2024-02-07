@@ -24,15 +24,17 @@ def searching_difference_normal(input_temperatures, final_data, threshold):
     if len(input_temperatures) != 7:
         raise ValueError("Input temperatures must be a list of 7 numbers.")
 
+    data = pd.read_csv(final_data)
+
     #initializing an empty list for stucking the similar periods
     similar_periods = []
 
     # Iterating through the 'final_data' and checking 7-day periods
-    for i in range(len(final_data) - 6):
+    for i in range(len(data) - 6):
         """ For each period, calculate the sum of square diff. between
             Temperatures and input Temperatures
            """
-        current_period = final_data.iloc[i:i+7]
+        current_period = data.iloc[i:i+7]
         current_temperatures = current_period['Temperature'].tolist()
         diff = sum((np.array(current_temperatures) - np.array(input_temperatures))**2)
 
@@ -43,31 +45,6 @@ def searching_difference_normal(input_temperatures, final_data, threshold):
             similar_periods.append(current_period)
 
     return similar_periods
-
-def get_temperature_input():
-    """
-    Function created for collecting the input.
-    Taking first 7 numbers as temperature values and the last 8th as the threshold.
-    """
-    while True:
-        try:
-            # Prompting for 7 temperatures and an additional number for the threshold
-            input_string = input("Enter 7 temperatures followed by a threshold, all separated by commas: ")
-            input_numbers = [float(num.strip()) for num in input_string.split(",")]
-
-            # Checking if there are exactly 8 numbers (7 temperatures + 1 threshold)
-            if len(input_numbers) != 8:
-                raise ValueError("Exactly 7 temperatures and 1 threshold are required.")
-
-            # Separating the temperatures and the threshold
-            temperatures = input_numbers[:7]
-            threshold = input_numbers[7]
-
-            return temperatures, threshold
-        except ValueError as e:
-            # Handling invalid input
-            print("Invalid input. Please enter 7 temperatures and 1 threshold, all separated by commas. Error:", e)
-
 
 
 # Load the merged file

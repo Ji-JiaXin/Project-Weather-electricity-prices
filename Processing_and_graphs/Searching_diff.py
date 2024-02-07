@@ -14,7 +14,7 @@ import numpy as np
 # Change the current working directory
 #os.chdir(new_directory)
 
-# Verify the change
+# Verify the change 
 #print("New working directory:", os.getcwd())
 
 
@@ -31,17 +31,18 @@ def searching_difference_diff(input_temperatures, final_data, threshold):
     # Usinf Numpy to compute the first difference of the input temperatures
     input_diff = np.diff(input_temperatures)
     
+    data = pd.read_csv(final_data)
     # Adding a Temperature_Diff column to the merged_data
-    final_data['Temperature_Diff'] = final_data['Temperature'].diff().fillna(0)
+    data['Temperature_Diff'] = data['Temperature'].diff().fillna(0)
     
     # Initializing an empty list for stacking the similar periods
     similar_periods = []
 
     # Iterating through the 'Data' and checking 6-day periods (since we're comparing differences)
-    for i in range(len(final_data) - 5):
+    for i in range(len(data) - 5):
         # For each period, calculate the sum of squared differences between
         # the Temperature_Diff and input temperature differences
-        current_period = final_data.iloc[i:i+6]
+        current_period = data.iloc[i:i+6]
         current_diffs = current_period['Temperature_Diff'].tolist()
         diff = sum((np.array(current_diffs) - np.array(input_diff))**2)
 
@@ -51,33 +52,8 @@ def searching_difference_diff(input_temperatures, final_data, threshold):
     
     return similar_periods
 
-
-def get_temperature_input():
-    """
-    Function created for collecting the input.
-    Taking first 7 numbers as temperature values and the last 8th as the threshold.
-    """
-    while True:
-        try:
-            # Prompting for 7 temperatures and an additional number for the threshold
-            input_string = input("Enter 7 temperatures followed by a threshold, all separated by commas: ")
-            input_numbers = [float(num.strip()) for num in input_string.split(",")]
-
-            # Checking if there are exactly 8 numbers (7 temperatures + 1 threshold)
-            if len(input_numbers) != 8:
-                raise ValueError("Exactly 7 temperatures and 1 threshold are required.")
-
-            # Separating the temperatures and the threshold
-            temperatures = input_numbers[:7]
-            threshold = input_numbers[7]
-
-            return temperatures, threshold
-        except ValueError as e:
-            # Handling invalid input
-            print("Invalid input. Please enter 7 temperatures and 1 threshold, all separated by commas. Error:", e)
-
 # Loading the merged file
-#final_data = pd.read_csv('final_data.csv')
+#data = pd.read_csv('final_data.csv')
 
 # Setting the values of the variables
 #input_temperatures, threshold = get_temperature_input()
