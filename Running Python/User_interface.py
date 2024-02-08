@@ -178,8 +178,8 @@ root = customtkinter.CTk()
 root.geometry("700x780")
 frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=5, padx=60, fill="both", expand=True)
-font_style_head= customtkinter.CTkFont(family="Times New Roman", size=14, weight="bold")
-font_style = customtkinter.CTkFont(family="Times New Roman", size=9)
+font_style_head= customtkinter.CTkFont(family="Times New Roman", size=13, weight="bold")
+font_style = customtkinter.CTkFont(family="Times New Roman", size=10)
 
 #Setting the entry bubbles
 entry_var_1 = tkinter.StringVar()
@@ -251,7 +251,7 @@ entry_7.pack(pady=0.5, padx=5)
 entry_7.configure(font=font_style)
 
 # For the threshold 
-label_entry_thre = customtkinter.CTkLabel(master=frame, text="Threshold (integer between 5-10):")
+label_entry_thre = customtkinter.CTkLabel(master=frame, text="Threshold (number between 4-11):")
 label_entry_thre.pack(pady=(0,0), padx=5)
 label_entry_thre.configure(font=font_style)
 entry_threshold = customtkinter.CTkEntry(master=frame, textvariable= entry_var_threshold)
