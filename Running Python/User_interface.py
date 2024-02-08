@@ -1,15 +1,15 @@
 # User Interface - the runner of our whole project
 
 # Example first input:
-   # "C:/Users/Sedláček/pr/Project-Weather-electricity-prices"
+   # "C:/Users/Sedláček/Project-Weather-electricity-prices"
 
 # pip install customtkinter
 import customtkinter
 import tkinter
-import pandas as pd
+#import pandas as pd
 import sys
 import os
-import tkinter.font as tkFont
+#import tkinter.font as tkFont
 
 # to process inserted path - get rid off the wrong backslash
 def on_set():
@@ -28,7 +28,10 @@ app.title("Set Working Directory")
 label_text = """Please enter your working directory,
 where you have downloaded our GitHub repository.
 Then press the Set buttom and the working directory
-will be set for further usage."""
+will be set for further usage.
+Example inpur:
+C:/Users/Sedláček/Project-Weather-electricity-prices"""
+
 font_style_label = customtkinter.CTkFont(family="Times New Roman", size=15)
 label = customtkinter.CTkLabel(app, text=label_text, font=font_style_label)
 label.pack(pady=10)
@@ -60,9 +63,9 @@ from Processing_and_graphs.Graphics import Visualisator
 from deutschland import smard
 from deutschland.smard import Configuration
 from deutschland.smard.api_client import ApiClient
-from deutschland.smard.api_client import Endpoint as _Endpoint
-from deutschland.smard.model.indices import Indices
-from deutschland.smard.model.time_series import TimeSeries
+#from deutschland.smard.api_client import Endpoint as _Endpoint
+#from deutschland.smard.model.indices import Indices
+#from deutschland.smard.model.time_series import TimeSeries
 
 config = Configuration(host="https://www.smard.de/app", discard_unknown_keys=True)
 api_client = ApiClient(config)

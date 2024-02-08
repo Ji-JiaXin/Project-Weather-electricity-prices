@@ -1,8 +1,8 @@
 
 #import packages
-from deutschland import smard
+#from deutschland import smard
 import pandas as pd
-from deutschland.smard import Configuration
+#from deutschland.smard import Configuration
 from deutschland.smard.api_client import ApiClient
 from deutschland.smard.api_client import Endpoint as _Endpoint
 from deutschland.smard.model.indices import Indices

@@ -1,5 +1,5 @@
 import pandas as pd
-import openpyxl
+#import openpyxl
 
 class Data_prep(object):
     
@@ -96,7 +96,7 @@ class Data_prep(object):
         merged_data['Temperature'] = merged_data['Temperature'].round(1)
         
         # Checking the data
-        print(merged_data)
+        #print(merged_data)
         
         # Saving the merged data to a new file
         merged_data.to_csv(output_file_path, index=False)
